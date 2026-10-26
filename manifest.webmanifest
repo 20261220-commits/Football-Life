@@ -1,0 +1,17 @@
+{
+  "name": "이번 생은 축구다",
+  "short_name": "축구 인생",
+  "description": "U15 유망주에서 은퇴까지 이어지는 축구선수 커리어 시뮬레이션",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070a0b",
+  "theme_color": "#070a0b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

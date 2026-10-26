@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#070a0b">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="축구 인생">
 <title>이번 생은 축구다</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -1263,5 +1271,25 @@ window._dbg={get s(){return s},get tr(){return tr},spNext:p=>spNext(p),get me(){
 (()=>{let id=null;try{id=localStorage.getItem(CURK)}catch(e){}if(id&&profs().some(x=>x.id===id))return loginAs(id);loginScreen()})();
 </script>
 
+<script>
+// 오프라인 플레이: 서비스 워커 등록, 처음 준비되면 한 번 알림
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      navigator.serviceWorker.ready.then(() => {
+        let first = false;
+        try { first = !localStorage.getItem('sc_offline_ok'); localStorage.setItem('sc_offline_ok', '1') } catch (e) {}
+        if (first && window.toast) toast('오프라인 준비 완료', '이제 와이파이 없이도 열 수 있습니다', 'g');
+      });
+      reg.addEventListener('updatefound', () => {
+        const w = reg.installing;
+        if (w) w.addEventListener('statechange', () => {
+          if (w.state === 'installed' && navigator.serviceWorker.controller && window.toast) toast('새 버전 준비됨', '다음에 열 때 적용됩니다', 'cy');
+        });
+      });
+    }).catch(() => {});
+  });
+}
+</script>
 </body>
 </html>
