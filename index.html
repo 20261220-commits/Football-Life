@@ -362,7 +362,12 @@ render(`<div class="hero"><h1>이번 생은<br>축구다!</h1><p class="eye" sty
 <div class="news"><span class="tag g">NEWS</span><span>${news}</span></div>
 <div class="btns">${x?`<button onclick="resume()">▶ ${esc(x.name)} 커리어 계속 →<small>${x.age}세 · ${P[x.pos].n}</small></button>`:''}<button class="${x?'alt':''}" onclick="newLife()">새로운 인생 시작</button></div>
 ${h.length?`<div class="card" style="margin-top:12px"><h3>명예의 전당 (${h.length})</h3>${h.slice(0,8).map(p=>`<p style="margin:0;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px">#${p.num} <b>${esc(p.name)}</b> · ${P[p.pos].n} · <span style="color:var(--yel)">${p.title}</span><br><span class="mute">${p.apps}경기 ${p.goals}골 ${p.ast}도움${p.lg?' · '+p.lg:''}</span></p>`).join('')}</div>`:''}
-<p class="mute" style="text-align:center;margin-top:16px">기록은 이 브라우저에만 저장됩니다.</p>`)}
+<div class="card" style="margin-top:12px"><div class="top"><h3>구단 엠블럼</h3><span class="mute">${Object.keys(EMBD).length} / ${SLUG.flat().length}개 적용</span></div>
+<p class="mute" style="margin:0 0 10px">엠블럼 SVG 파일이 든 폴더를 고르면 구단 배지가 이미지로 바뀝니다. 파일 이름은 영문 이름(arsenal.svg)이나 구단 이름(아스날.svg) 모두 됩니다.</p>
+<div class="btns two"><button class="alt" onclick="document.getElementById('embd').click()">폴더 불러오기</button><button class="alt" onclick="document.getElementById('embf').click()">파일 골라 불러오기</button></div>
+${Object.keys(EMBD).length?'<button class="rd w mt" onclick="embClear()">불러온 엠블럼 지우기</button>':''}
+<input type="file" id="embd" webkitdirectory multiple hidden onchange="embLoad(this.files)"><input type="file" id="embf" accept=".svg,image/svg+xml" multiple hidden onchange="embLoad(this.files)"></div>
+<p class="mute" style="text-align:center;margin-top:16px">기록과 엠블럼은 이 브라우저에만 저장됩니다.</p>`)}
 function newLife(){const x=load();if(!x)return splash();modal(`<div class="eye">NEW LIFE</div><h2>새로 시작하시겠습니까?</h2><p class="mute">진행 중인 선수(${esc(x.name)})는 삭제됩니다. 은퇴한 선수의 명예의 전당 기록은 남습니다.</p><div class="btns two" style="margin-top:14px"><button class="alt" onclick="closeModal()">취소</button><button onclick="closeModal();try{localStorage.removeItem(SAVE)}catch(e){};splash()">새로운 인생 시작</button></div>`)}
 function splash(){render(`<div class="splash" onclick="create()"><div class="sp"><div class="eye">SECOND LIFE : FOOTBALL</div><p>${pk(QUIPS)}</p></div><span class="mute">탭하여 스킵</span></div>`);later(create,2600)}
 
@@ -372,7 +377,15 @@ const KC=[['울산','#3d6fae'],['전북','#2f7d52'],['서울','#a8443f'],['강�
 const SLUG=[['ulsan','jeonbuk','fc-seoul','gangwon','daejeon','jeju','incheon','pohang','suwon','daegu'],['galatasaray','fenerbahce','al-nassr','al-hilal','la-galaxy','inter-miami'],
 ['club-brugge','porto','benfica','ajax','leipzig','brighton','monaco','udinese','salzburg','anderlecht','southampton','valencia'],
 ['arsenal','man-utd','man-city','chelsea','liverpool','tottenham','psg','lyon','real-madrid','barcelona','atletico','villarreal','inter','ac-milan','juventus','roma','como','bayern','dortmund','leverkusen']];
-const emb=(t,i)=>`<img class="emb" src="emblems/${SLUG[t][i]}.png" alt="" onerror="this.remove()">`;
+// 엠블럼: 홈에서 불러온 SVG(이 브라우저에 저장) → 없으면 index.html 옆 emblems/<영문 이름>.svg → 둘 다 없으면 글자 배지
+const EMBK='sc_emb_v1';let EMBD={};try{EMBD=JSON.parse(localStorage.getItem(EMBK))||{}}catch(e){}
+const emb=(t,i)=>`<img class="emb" src="${EMBD[SLUG[t][i]]||`emblems/${SLUG[t][i]}.svg`}" alt="" onerror="this.remove()">`;
+const normN=x=>x.normalize('NFC').toLowerCase().replace(/[\s_.\-]/g,'');
+async function embLoad(files){const map={};SLUG.forEach((g,t)=>g.forEach((sl,i)=>{map[normN(sl)]=sl;map[normN(club(t,i).n)]=sl}));const nd={...EMBD},miss=[];let ok=0;
+for(const f of files){if(!/\.svg$/i.test(f.name))continue;const sl=map[normN(f.name.replace(/\.svg$/i,''))];if(!sl){miss.push(f.name);continue}nd[sl]='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(await f.text());ok++}
+try{localStorage.setItem(EMBK,JSON.stringify(nd));EMBD=nd}catch(e){toast('저장 공간이 부족합니다','SVG 파일 크기를 줄여 다시 불러와 주세요','red');return}
+toast(ok?`엠블럼 ${ok}개 적용`:'적용된 엠블럼이 없습니다',miss.length?`이름이 맞지 않은 파일 ${miss.length}개: ${miss.slice(0,3).join(', ')}${miss.length>3?' 외':''}`:'',ok?'g':'red');home()}
+function embClear(){try{localStorage.removeItem(EMBK)}catch(e){}EMBD={};toast('불러온 엠블럼을 지웠습니다','','yel');home()}
 const badge=i=>`<span class="cb" style="background:${KC[i][1]}">${KC[i][0]}${emb(0,i)}</span>`;
 const TCOL=['#3d6fae','#a8743a','#3f8f96','#6e5fae'];
 const clubBadge=(t,i,sm)=>t===0?badge(i).replace('class="cb"',`class="cb${sm?' sm':''}"`):`<span class="cb${sm?' sm':''}" style="background:${TCOL[t]}">${club(t,i).n.replace(/^(FC|AFC|SL|RB|RSC|AS|AC|LA) /,'').slice(0,2)}${emb(t,i)}</span>`;
