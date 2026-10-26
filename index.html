@@ -234,7 +234,7 @@ details.det{background:var(--card);border:1px solid var(--line);border-radius:10
 .tlb{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--card)}.tlb b{font-size:14px}.tlr{font-size:11.5px;font-weight:700;color:var(--yel);text-align:right}
 .tln{margin:6px 0 0;padding:7px 9px;border-radius:8px;background:var(--card2);font-size:12.5px;color:var(--mute)}
 .rkr{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:10px 0}.rkr span{color:var(--mute);font-size:13px;width:80px;text-align:right}.rkr b{font-size:30px;font-variant-numeric:tabular-nums}.rkr small{color:var(--mute);width:60px;text-align:left}
-.gcard{background:linear-gradient(160deg,#c9a24a,#8f6c22 60%,#c49a3e);border-radius:18px;padding:14px;color:#1c1405;cursor:pointer;margin-bottom:6px;animation:flip .7s cubic-bezier(.2,.8,.2,1) both}
+.gcard{background:linear-gradient(160deg,#c9a24a,#8f6c22 60%,#c49a3e);border:2px solid transparent;border-radius:18px;padding:14px;color:#1c1405;cursor:pointer;margin-bottom:6px;animation:flip .7s cubic-bezier(.2,.8,.2,1) both}
 .gch{display:flex;gap:12px;align-items:center;padding:4px 4px 12px;border-bottom:1px solid rgba(0,0,0,.2);margin-bottom:10px}.gch .cb{width:56px;height:56px;font-size:14px;border-radius:12px}.gch b{display:block;font-size:20px}.gch small{display:block;font-size:12px;opacity:.75}
 .gcs{background:rgba(16,22,26,.88);color:var(--ink);border-radius:12px;padding:12px;margin-bottom:8px}.gcs small{font-size:11px;letter-spacing:.06em;color:var(--mute)}.gcs .top b{font-size:22px}
 .gcp{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px;text-align:center}.gcp div{background:var(--card2);border-radius:8px;padding:6px 2px;min-width:0}.gcp small{display:block;font-size:10px;color:var(--mute)}.gcp b{color:var(--ink)}.gcp b{font-size:13px;font-variant-numeric:tabular-nums}
@@ -242,6 +242,20 @@ details.det{background:var(--card);border:1px solid var(--line);border-radius:10
 .gpa{display:grid;grid-template-columns:60px 36px 22px 1fr;gap:8px;align-items:center;margin-top:8px;font-size:13px}.gpa b{text-align:right;font-variant-numeric:tabular-nums}.gpa em{font-style:normal;font-size:11px;font-weight:700;text-align:center;border-radius:4px;padding:1px 0;background:var(--card2)}
 .gpa .gS{background:#4f7fd0;color:#fff}.gpa .gA{background:var(--g);color:var(--on)}.gpa .gB{background:#c9a24a;color:#1c1405}
 .gach{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.gach span{border:1px solid rgba(201,162,74,.6);border-radius:999px;padding:4px 10px;font-size:12px}
+
+.gcard.th-bronze{background:linear-gradient(160deg,#c48a5a,#8a5430 60%,#b67a4b);color:#1e0f05}
+.gcard.th-silver{background:linear-gradient(160deg,#e3e7ea,#9aa3aa 60%,#cfd5d9);color:#14181b}
+.gcard.th-gold{background:linear-gradient(160deg,#e2c062,#a07a22 60%,#d6b04e);color:#1c1405}
+.gcard.th-black{background:linear-gradient(160deg,#2a2f33,#0c0e10 60%,#22272b);color:#e6eeeb;border-color:#5b6268}
+.gcard.th-hof{background:linear-gradient(160deg,#181512,#050505 60%,#141210);color:#c69a4c;border-color:#c69a4c;box-shadow:0 0 0 1px rgba(198,154,76,.25) inset}
+.gcard.th-black .gch,.gcard.th-hof .gch{border-bottom-color:rgba(255,255,255,.12)}
+.gcard.th-black .gcs,.gcard.th-black .gcp.g3{background:rgba(255,255,255,.06)}
+.gcard.th-hof .gcs,.gcard.th-hof .gcp.g3{background:rgba(198,154,76,.07);border:1px solid rgba(198,154,76,.35);color:#c69a4c}
+.gcard.th-hof .gcs small,.gcard.th-hof .gcp small,.gcard.th-hof .gcs b,.gcard.th-hof .gcp b,.gcard.th-hof .gpa b,.gcard.th-hof .gpa span{color:#c69a4c}
+.gcard.th-hof .gcp div,.gcard.th-hof .gpa em{background:rgba(198,154,76,.1)}.gcard.th-hof .bar i{background:#c69a4c}.gcard.th-hof .gach span{border-color:#c69a4c}
+.gcard.th-black .gach span{border-color:#6d757b}
+.gcs .gcp.g3{background:none;padding:0;margin:8px 0 0}
+.hofb{margin-left:auto;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.12em;border:1px solid #c69a4c;color:#c69a4c;border-radius:6px;padding:3px 7px;white-space:nowrap}
 @media (max-width:380px){.tiles.n5{grid-template-columns:repeat(3,1fr)}.seg.s4{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion:reduce){.cl,.jsy,.tli,.gcard,.ngr{animation:none!important;opacity:1!important}#toast.in,.pop1,.cd.flip,.cd.flip::after,.cd.hid.shake,.rise,.rise2,.scout .bar i,.ring,.reveal,.revc,.tline .now,.stag .tiles div{animation:none!important}.bar i{transition:none}}
 @media (max-width:380px){.cands{gap:6px}.cd b{font-size:13px}.kv{grid-template-columns:1fr}}
@@ -884,8 +898,7 @@ window._sum=sum;log(`${s.age}세에 현역에서 은퇴했습니다. 칭호: ${t
 let hl=[];try{hl=hall();hl.unshift({id:s.id,v:4,name:s.name,num:s.num,foot:s.foot,pos:s.pos,style:s.style,age:s.age,apps:s.apps,goals:s.goals,ast:s.ast,caps:s.caps,wc:s.wc,aw:s.aw,lg:lgn,ovr:o,peak:s.peak,title:t,legacy:lg.total});localStorage.setItem(HALL,JSON.stringify(hl.slice(0,200)));localStorage.removeItem(SAVE)}catch(e){hl=[{id:s.id,pos:s.pos,legacy:lg.total}]}
 const sc2=x=>x.legacy??legacyOf(x).total,all=hl.map(sc2).sort((a,b)=>b-a),mine=hl.filter(x=>x.pos===s.pos).map(sc2).sort((a,b)=>b-a);
 s.done=true;s.ret={t,lgn,one,ret,lg,rank:[all.indexOf(lg.total)+1,all.length,mine.indexOf(lg.total)+1,mine.length]};retSeq(0)}
-function retSeq(k){const R0=s.ret,nm=esc(s.name),sc=[[`${nm}은(는) 은퇴했지만`,'아직 마지막 이야기가 남았습니다.']];
-if(R0.ret)sc.push([`${R0.lgn}가`,`${nm}의 이름을`,'구단 역사에 남기기로 했습니다.'],'jersey');else sc.push([`${s.age}세, ${nm}의 마지막 경기.`,`${s.seasons}시즌 · ${s.apps}경기 · ${s.goals}골`]);
+function retSeq(k){const R0=s.ret,nm=esc(s.name);if(!R0.ret)return lifeTL();const sc=[[`${nm}은(는) 은퇴했지만`,'아직 마지막 이야기가 남았습니다.'],[`${R0.lgn}가`,`${nm}의 이름을`,'구단 역사에 남기기로 했습니다.'],'jersey'];
 if(k>=sc.length)return lifeTL();const x=sc[k];
 if(x==='jersey'){render(`<div class="cine" onclick="retSeq(${k+1})"><div class="jsy"><svg viewBox="0 0 200 190"><path d="M60 20 L35 30 L8 62 L30 82 L48 66 L48 178 L152 178 L152 66 L170 82 L192 62 L165 30 L140 20 Q100 46 60 20 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg><div class="jin"><b>${nm}</b><strong>${s.num}</strong><canvas id="jsg" width="300" height="90"></canvas></div></div>
 <div class="cl" style="animation-delay:1.2s">${s.num}번은 이제,<br>${nm}의 이름으로 남습니다.</div><p class="cl mute" style="animation-delay:1.8s">${s.seasons}시즌 · ${s.apps}경기 · ${s.goals}골 ${s.ast}도움</p><p class="cl" style="animation-delay:2.2s"><b>${R0.lgn} 영구결번</b></p><span class="mute cl" style="animation-delay:2.6s">탭하여 계속</span></div>`);
@@ -900,16 +913,21 @@ let n=0;iv=setInterval(()=>{n++;const e=document.getElementById('tlc');if(e)e.te
 function legacyCalc(){const R0=s.ret;render(`<div class="full"><div class="dbox" style="padding:28px 16px"><div class="eye">LEGACY SCORE</div><div class="big" style="font-size:22px">${esc(s.name)}의<br>커리어 집계 중</div><p class="mute">통산 성적 · 수상 · 우승 · 국가대표 기록을 계산하고 있습니다.</p><div class="bar" style="height:4px;margin-top:14px"><i id="lgp" style="width:0%;transition:width 1.6s ease-out"></i></div></div></div>`);
 later(()=>{const e=document.getElementById('lgp');if(e)e.style.width='100%'},50);
 later(()=>modal(`<div style="text-align:center"><div class="eye">TODAY'S RANKING</div><h2>오늘의 ${P[s.pos].n} 순위</h2><div class="rkr"><span>전체</span><b>${R0.rank[0].toLocaleString()}위</b><small>/ ${R0.rank[1]}명</small></div><div class="rkr"><span>${P[s.pos].n}</span><b>${R0.rank[2]}위</b><small>/ ${R0.rank[3]}명</small></div><p class="mute" style="font-size:12px">이 브라우저에 기록된 은퇴 선수 기준</p><button class="w mt" onclick="closeModal();pcard()">선수카드 보기 →</button></div>`),1900)}
-const grade=v=>v>=24?'S':v>=20?'A':v>=16?'B':v>=12?'C':'D';
-function pcard(back){const R0=s.ret,pk0=s.peak||{o:ovr(s),st:s.st,lab:lab()},c=s.ci!=null?clubBadge(s.tier,s.ci):'',tally={};s.aw.forEach(a=>tally[a]=(tally[a]||0)+1);
+const grade=v=>v>=24?'S':v>=20?'A':v>=16?'B':v>=12?'C':'D',GPT={S:4,A:3,B:2,C:1,D:0};
+// 카드 색: 앞면은 은퇴 구단(국내/해외)과 영구결번, 뒷면은 전성기 능력치 합 + 등급 점수×2(S4·A3·B2·C1), 레거시 8300 초과는 양면 명예의 전당
+function cardTheme(){const R0=s.ret,pk0=s.peak||{o:ovr(s),st:s.st},hof=R0.lg.total>8300,dom=s.tier===0;
+const ps=s.k.reduce((a,k)=>a+pk0.st[k]+GPT[grade(pk0.st[k])]*2,0),bt=ps>=125?'black':ps>=110?'gold':ps>=90?'silver':'bronze';
+return{hof,front:hof?'hof':R0.ret?(dom?'gold':'black'):'silver',back:hof?'hof':bt,ps:Math.round(ps)}}
+const TNAME={bronze:'동',silver:'은',gold:'금',black:'검',hof:'명예의 전당'};
+function pcard(back){const R0=s.ret,pk0=s.peak||{o:ovr(s),st:s.st,lab:lab(),age:s.age},th=cardTheme(),c=s.ci!=null?clubBadge(s.tier,s.ci):'',tally={};s.aw.forEach(a=>tally[a]=(tally[a]||0)+1);
 const rts=s.hs.filter(h=>!h.bio&&h.rt&&h.lv!=='U-18').map(h=>+h.rt),avg=rts.length?f1(rts.reduce((a,b)=>a+b,0)/rts.length):'-';
-const head=`<div class="gch">${c}<div style="min-width:0"><b>${esc(s.name)} ${R0.ret||R0.lg.total>2500?'👑':''}</b><small>${R0.lgn||'-'}</small><small>${P[s.pos].n} · No.${s.num} · 은퇴 ${s.age}세</small></div></div>`;
+const head=`<div class="gch">${c}<div style="min-width:0"><b>${esc(s.name)} ${R0.ret||th.hof?'👑':''}</b><small>${R0.lgn||'-'}${R0.ret?` · ${s.num}번 영구결번`:''}</small><small>${P[s.pos].n} · No.${s.num} · 은퇴 ${s.age}세</small></div>${th.hof?'<span class="hofb">HALL OF FAME</span>':''}</div>`;
 const front=`${head}<div class="gcs"><div class="top"><small>LEGACY SCORE</small><b>${R0.lg.total.toLocaleString()}점</b></div><div class="gcp">${R0.lg.parts.map(([k,v])=>`<div><small>${k}</small><b>${v.toLocaleString()}</b></div>`).join('')}</div></div>
-<div class="gcs"><div class="top"><small>PRIME ABILITY</small><small>${pk0.lab} · ${pk0.age}세 · OVR ${f1(pk0.o)}</small></div>${s.k.map(k=>{const v=pk0.st[k];return `<div class="gpa"><span>${k}</span><b>${f1(v)}</b><em class="g${grade(v)}">${grade(v)}</em><div class="bar"><i style="width:${Math.min(100,v/30*100)}%"></i></div></div>`}).join('')}</div>`;
-const backS=`${head}<div class="gcs"><small>CAREER REVIEW</small><b style="display:block;font-size:16px;margin:4px 0">${R0.ret?`${R0.lgn}에 영원히 남은 번호`:R0.t}</b><small>${s.seasons}시즌 · 은퇴 나이 ${s.age}세</small></div>
-<div class="gcp g3"><div><small>경기</small><b>${s.apps}</b></div><div><small>골</small><b>${s.goals}</b></div><div><small>도움</small><b>${s.ast}</b></div><div><small>A매치</small><b>${s.caps}</b></div><div><small>평균 평점</small><b>${avg}</b></div><div><small>통산 수입</small><b>${f1(s.earn)}억</b></div></div>
+<div class="gcs"><small>CAREER RECORD · ${s.seasons}시즌</small><div class="gcp g3"><div><small>경기</small><b>${s.apps}</b></div><div><small>골</small><b>${s.goals}</b></div><div><small>도움</small><b>${s.ast}</b></div><div><small>A매치</small><b>${s.caps}</b></div><div><small>평균 평점</small><b>${avg}</b></div><div><small>통산 수입</small><b>${f1(s.earn)}억</b></div></div></div>
 <div class="gcs"><small>주요 업적</small><div class="gach">${Object.entries(tally).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<span>🏆 ${k}${v>1?` · ${v}회`:''}</span>`).join('')||'<span>기록 없음</span>'}</div></div>`;
-render(`<div class="gcard${back?' bk':''}" onclick="pcard(${back?0:1})">${back?backS:front}</div><p class="mute" style="text-align:center;font-size:12px">↻ 카드를 눌러 ${back?'앞면':'뒷면'} 보기</p>
+const backS=`${head}<div class="gcs"><div class="top"><small>PRIME ABILITY</small><small>${pk0.lab} · ${pk0.age}세 · OVR ${f1(pk0.o)}</small></div>${s.k.map(k=>{const v=pk0.st[k];return `<div class="gpa"><span>${k}</span><b>${f1(v)}</b><em class="g${grade(v)}">${grade(v)}</em><div class="bar"><i style="width:${Math.min(100,v/30*100)}%"></i></div></div>`}).join('')}</div>
+<div class="gcs"><div class="top"><small>PRIME TIER</small><b>${TNAME[th.back]}${th.hof?'':' 등급'}</b></div><p class="mute" style="margin:6px 0 0;font-size:12px">능력치 합 + 등급 점수×2 = ${th.ps}점 · 동 90 미만 · 은 90 · 금 110 · 검 125 이상</p></div>`;
+render(`<div class="gcard th-${back?th.back:th.front}" onclick="pcard(${back?0:1})">${back?backS:front}</div><p class="mute" style="text-align:center;font-size:12px">↻ 카드를 눌러 ${back?'앞면':'뒷면'} 보기 · ${back?'뒷면: 전성기 능력치':'앞면: 레거시와 통산 기록'}</p>
 <div class="card"><p id="sumt" style="white-space:pre-line;margin:0 0 12px;font-size:13px">${esc(window._sum||'')}</p><div class="btns two"><button onclick="cp()" id="cb">결과 복사</button><button class="alt" onclick="home()">새 인생 시작</button></div><p class="mute" style="margin:8px 0 0">시즌 기록과 업적은 위쪽 탭에서 계속 볼 수 있습니다.</p></div>`)}
 function cp(){const b=document.getElementById('cb'),fail=()=>{b.textContent='텍스트를 직접 복사하세요';const r=document.createRange();r.selectNodeContents(document.getElementById('sumt'));const sl=getSelection();sl.removeAllRanges();sl.addRange(r)};
 try{navigator.clipboard.writeText(window._sum).then(()=>b.textContent='복사됨',fail)}catch(e){fail()}}
