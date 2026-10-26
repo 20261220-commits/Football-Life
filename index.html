@@ -211,6 +211,16 @@ details.det{background:var(--card);border:1px solid var(--line);border-radius:10
 .resg{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0 10px}.resg>span{font-size:16px}.resg div{text-align:right}.resg b{display:block;font-size:34px;color:var(--g);font-variant-numeric:tabular-nums;animation:pop1 .4s ease-out}.resg small{color:var(--mute);font-size:12px}
 .resb{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0 4px}.resb small{font-size:11px;color:var(--mute)}.resb b{display:block;font-size:18px;margin:4px 0 8px;padding-bottom:8px;border-bottom:1px solid var(--line)}.resb p{margin:0;font-size:13px;color:var(--mute)}
 .li.big{padding:16px 14px}.li.big b{font-size:15px}
+
+.trc{width:100%;max-width:250px;aspect-ratio:1;display:block;margin:8px auto;touch-action:none;background:var(--card2);border-radius:12px;cursor:crosshair}
+.trc .tw{fill:none;stroke:#2d4656;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.trc .tc{fill:none;stroke:#7b93a0;stroke-width:.5;stroke-dasharray:1.5 1.5}
+.trc .td{fill:none;stroke:#9fd8ee;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.trc .ts{fill:#9fd8ee}.trc .te{fill:var(--yel)}.trc .tl{fill:var(--mute);font-size:4px;text-anchor:middle;font-weight:700}
+#nx button{margin-top:8px}
+.swap{display:flex;align-items:center;gap:10px;margin:14px 0}.swap div{flex:1;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}.swap div.on{border-color:var(--g)}.swap small{display:block;font-size:11px;color:var(--mute)}.swap b{font-size:18px}.swap i{font-style:normal;color:var(--g)}
+.tchips.c5{grid-template-columns:repeat(5,1fr)}.tchips.c5 span{font-size:11px;padding:10px 0}
+.awc{display:flex;gap:12px;align-items:center;margin-top:10px;border-color:rgba(216,183,90,.45)}.awi{font-size:30px}.awc b{display:block;font-size:15px;margin:2px 0}
+.quote{display:flex;gap:10px;align-items:flex-start}.qi{font-style:normal;flex:none;width:20px;height:20px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink)}
+.quote+.quote{margin-top:-4px}
 @media (max-width:380px){.tiles.n5{grid-template-columns:repeat(3,1fr)}.seg.s4{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion:reduce){#toast.in,.pop1,.cd.flip,.cd.flip::after,.cd.hid.shake,.rise,.rise2,.scout .bar i,.ring,.reveal,.revc,.tline .now,.stag .tiles div{animation:none!important}.bar i{transition:none}}
 @media (max-width:380px){.cands{gap:6px}.cd b{font-size:13px}.kv{grid-template-columns:1fr}}
@@ -391,7 +401,7 @@ const details=L=>`<details class="det"><summary>상세 기록</summary><div clas
 const ovrBox=(o0,o1,sh)=>`<div class="ovrc"><span>OVR 변화</span><b>${f1(o0)} → <i data-rv="${f1(o1)}" data-c="${o1>=o0?'up':'dn'}" class="${sh?(o1>=o0?'up':'dn'):''}">${sh?f1(o1):'?'}</i></b></div>`;
 const chgTiles=(chg,sh)=>`<div class="tiles n5">${chg.map(([k,a,b])=>{const dd=r1(b-a),tx=f1(b)+'|'+sgn(dd);return `<div><small>${k}</small><b data-rv="${f1(b)}">${sh?f1(b):'?'}</b><i data-rv="${sgn(dd)}" data-c="${dd>=0?'up':'dn'}" class="${sh?(dd>=0?'up':'dn'):''}">${sh?sgn(dd):'?'}</i></div>`}).join('')}</div>`;
 function revealAnim(done){const els=[...app.querySelectorAll('[data-rv]')];els.forEach((e,i)=>later(()=>{e.textContent=e.dataset.rv;if(e.dataset.c)e.classList.add(e.dataset.c);e.classList.add('pop1')},500+i*120));later(done,600+els.length*120)}
-const quote=t=>`<div class="quote">♥ ${t}</div>`;
+const quote=(t,ic)=>`<div class="quote"><i class="qi">${ic||'♥'}</i>${t}</div>`;
 
 // ── U15 ──
 const TN=[['5월','전국소년체전'],['7월','주말리그 왕중왕전'],['8월','추계 중등연맹전']],STG=['16강','8강','4강','준우승','우승'];
@@ -584,6 +594,10 @@ function offerAns(y){const of=s.offer;s.offer=null;if(y)return contract(of,'new'
 function evModal(){const e=s.ev;modal(`<div><span class="tag g">${lab()} 시즌 준비</span> <span class="eye" style="display:inline">OFFSEASON EVENT</span></div><h2 style="margin:8px 0">${e.t}</h2><div class="callout" style="margin:0 0 12px"><b>${e.b}</b></div>
 <div class="list"><button class="li big" onclick="evAns(1)"><span><b>${e.a}</b></span></button><button class="li big" onclick="evAns(0)"><span><b>${e.c}</b></span></button></div>`)}
 function evAns(y){const e=s.ev;s.ev=null;
+if(e.id==='first'){if(y){s.pen=-1;log('주어진 역할부터 맡기로 했습니다.','이벤트','v');return resultModal('주어진 역할부터 맡는다','감독의 신뢰를 얻었습니다. 다음 시즌 출전 기회가 조금 더 안정적입니다.')}
+if(Math.random()<.5){s.pen=-4;log('핵심 역할을 요청해 받아들여졌습니다.','이벤트','g');return resultModal('핵심 역할을 요청한다','요청이 받아들여졌습니다. 더 많은 출전 기회를 얻지만 짧은 평가에서 기량을 증명해야 하는 부담도 함께 커집니다.')}
+s.pen=3;log('핵심 역할 요청이 거절됐습니다.','이벤트','r');return resultModal('핵심 역할을 요청한다','감독은 아직 이르다고 판단했습니다. 관계가 조금 어색해져 다음 시즌 입지가 흔들릴 수 있습니다.')}
+if(e.id==='raise'){if(y){closeModal();return contract(e.of,'re')}log('연봉 인상 제안을 보류했습니다.','계약','o');return resultModal('지금 계약을 유지한다','현재 계약 조건으로 시즌을 치릅니다. 계약이 끝나면 다시 협상할 수 있습니다.')}
 if(e.id==='coach'){if(y){s.style=e.n;e.ks.forEach(k=>bump(k,.3));log(`${e.n} 역할로 전환했습니다. (${e.ks.join('·')} +0.3)`,'이벤트','v');return resultModal(`${e.n} 역할로 전환`,`${e.ks.join('·')}가 0.3씩 올랐습니다. 새 역할로 시즌을 준비합니다.`)}log('기존 역할을 유지하기로 했습니다.','이벤트','v');return resultModal('기존 역할 유지',`${s.style} 역할로 계속 뜁니다.`)}
 if(y){s.pen=4;log('팀에 남기로 했습니다. 어수선한 분위기에 입지가 흔들립니다.','이벤트','r');return resultModal('팀 잔류','어수선한 분위기 속에 다음 시즌 입지가 흔들릴 수 있습니다.')}
 log('불화 끝에 이적을 택했습니다.','이벤트','r');s.offers=null;closeModal();market('tr')}
@@ -600,7 +614,7 @@ if(apps>0&&Math.random()<.1){const m=R(2,7);apps=Math.max(1,Math.round(apps*(1-m
 const SL=statLine(apps,gap,lvp,big),{g,a,rt,cs}=SL;
 const sz=yo?12:L.sz,contrib=yo?0:lvp===3?cl(gap/6,-2,1.5):lvp===2?cl(gap/12,-1,.5):0;
 const rank=yo?cl(Math.round(6-gap/3+R(-3,3)),1,12):cl(Math.round(c.ex*rf(.8,1.8)+R(0,3)-contrib),1,sz),cur=s.comp,won=[];
-if(!yo){s.apps+=apps;s.goals+=g;s.ast+=a;s.fame+=Math.max(0,Math.round(gap/3+g/4));s.seasons++;s.earn+=s.ct.sal}
+if(!yo){s.apps+=apps;s.goals+=g;s.ast+=a;s.fame+=Math.max(0,Math.round(gap/3+g/4));s.seasons++;s.earn+=s.ct.sal}const pay=yo?null:{sal:s.ct.sal,allow:r1(apps*s.ct.sal*.012)};
 const win=t=>{s.aw.push(t);won.push(t);notes.push('🏆 '+t)},aw=(ok,t)=>{if(ok){s.aw.push(t);notes.push('⭐ '+t)}};
 if(yo){if(rank===1)notes.push('🏆 U-18 리그 우승')}
 else{const star=lvp>=2;
@@ -610,9 +624,11 @@ if(cur!=='없음'){const pr={'챔피언스리그':tier===3?cl(.16-c.ex*.012,.03,
 if(yr%4===1&&(cur==='챔피언스리그'||cur==='AFC 챔피언스리그')){notes.push('🌐 FIFA 클럽 월드컵 출전');if(Math.random()<(tier===3?cl(.35-c.ex*.03,.05,.3):.04))win('FIFA 클럽 월드컵 우승')}
 if(star){aw(rt>=7.7&&apps>=25&&Math.random()<.5,'리그 베스트11');aw(rt>=8.2&&apps>=28&&rank<=3&&Math.random()<.3,'리그 MVP');aw(!gk&&g>=22&&apps>=25&&Math.random()<.45+(g-22)/20,'리그 득점왕');aw(a>=13&&Math.random()<.4+(a-13)/15,'리그 도움왕');
 aw(!gk&&L.eu&&g*(L.t5?2:1.5)>=56&&Math.random()<.6,'유러피언 골든슈');aw(tier===3&&rt>=8.3&&o>=85&&Math.random()<.15+won.length*.06,'발롱도르');aw(gk&&rt>=7.9&&tier>=2&&Math.random()<.4,'야신상');
-aw(o>=83&&rt>=8&&tier>=2&&Math.random()<.35,'FIFPro 월드 베스트11');aw(!gk&&g>=12&&Math.random()<.02,'푸스카스상');aw(old<=21&&tier>=2&&o>=66&&rt>=7.4&&!s.aw.includes('골든보이')&&Math.random()<.4,'골든보이')}}
+aw(o>=83&&rt>=8&&tier>=2&&Math.random()<.35,'FIFPro 월드 베스트11');aw(!gk&&g>=12&&Math.random()<.02,'푸스카스상');aw(old<=21&&tier>=2&&o>=66&&rt>=7.4&&!s.aw.includes('골든보이')&&Math.random()<.4,'골든보이')}
+aw(s.pro<=2&&old<=23&&rt>=7.1&&apps>=20&&Math.random()<.45,'영플레이어상')}
 notes.push(...natTeam(o,old,true));
 if(apps)log(`${cn()} ${apps}경기 ${g}골 ${a}도움 · 평점 ${f1(rt)} · ${rank}위`,lb,'b');
+if(pay){pay.bonus=r1(won.length*s.ct.sal*.1);pay.total=r1(pay.sal+pay.allow+pay.bonus);s.earn+=pay.allow+pay.bonus}
 const prevL=s.lvp,GMS={12:38,15:34,16:34,18:34,20:38,24:46}[sz]||34,ng=yo?22:GMS,ppg=2.3-(rank-1)/Math.max(1,sz-1)*1.6,dr0=Math.round(ng*rf(.16,.3)),w0=cl(Math.round((ppg*ng-dr0)/3),0,ng-dr0),
  team={rank,sz,w:w0,d:dr0,l:ng-w0-dr0,pts:w0*3+dr0,cup:yo?null:[L.cup,won.includes(L.cup+' 우승')?'우승':pk(['3라운드','16강','8강','4강'])],comp:!yo&&cur!=='없음'?[cur,won.includes(cur+' 우승')?'우승':pk(['리그 페이즈 탈락','16강','8강','4강'])]:null};s.lvp=lvp;s.rank=`${rank}위 / ${sz}`;s.comp=yo?'없음':compFor(c.lg,rank);
 const clubNm=cn();grow(yo?'y':'pro');s.age++;s.y++;s.spY=null;if(!yo){s.pro++;s.ct.left--}
@@ -623,13 +639,17 @@ const force=!yo&&(s.age>=39||(s.age>=32&&o1<T[0].need-8)),done=yo&&s.age>=19;
 if(!yo&&!force&&s.ct.left>0){let top=0;for(let t=3;t>=1;t--)if(o1>=T[t].need-2){top=t;break}
 if(top>tier&&s.age<=33&&Math.random()<.45)s.offer={...mkOffer(top,R(0,T[top].c.length-1),0),kind:'up'};
 else if(lvp===1&&s.pro>1&&Math.random()<.35){const t=Math.max(0,tier-1);let i=R(0,T[t].c.length-1);if(t===tier&&i===s.ci)i=(i+1)%T[t].c.length;s.offer={...mkOffer(t,i,0),kind:'sell'}}
-const ro=Math.random();if(ro<.2){const alt=pk(p.s.filter(x=>x[0]!==s.style));s.ev={id:'coach',t:'감독의 성장 루트 제안',b:`감독이 ${alt[0]} 역할로의 전환을 제안합니다. 받아들이면 ${alt[1]}·${alt[2]}가 0.3씩 오릅니다.`,a:'제안을 받아들인다',c:'지금 역할을 유지한다',n:alt[0],ks:[alt[1],alt[2]]}}
+const ro=Math.random(),rOf=mkOffer(s.tier,s.ci,1);if(!s.f3&&lvp===3){s.f3=1;s.ev={id:'first',t:'처음 받은 1군의 자리',b:'첫 1군 주전 시즌을 마친 뒤 맞는 시즌 준비 기간입니다. 감독이 다음 시즌 필요한 역할을 설명합니다. 주어진 역할부터 익힐지, 더 큰 역할을 요청할지 결정해야 합니다.',a:'주어진 역할부터 맡는다',c:'핵심 역할을 요청한다'}}
+else if(lvp===3&&s.ct.left>=2&&rOf.sal>=s.ct.sal*1.3&&ro<.6){s.ev={id:'raise',t:'연봉 인상 제안',b:`구단이 활약을 인정해 계약을 새로 맺자고 제안했습니다. 연봉 ${s.ct.sal}억 → ${rOf.sal}억 (+${Math.round((rOf.sal/s.ct.sal-1)*100)}%), ${rOf.yrs}년 계약입니다.`,a:'새 계약에 서명한다',c:'지금 계약을 유지한다',of:rOf}}
+else if(ro<.2){const alt=pk(p.s.filter(x=>x[0]!==s.style));s.ev={id:'coach',t:'감독의 성장 루트 제안',b:`감독이 ${alt[0]} 역할로의 전환을 제안합니다. 받아들이면 ${alt[1]}·${alt[2]}가 0.3씩 오릅니다.`,a:'제안을 받아들인다',c:'지금 역할을 유지한다',n:alt[0],ks:[alt[1],alt[2]]}}
 else if(ro<.3)s.ev={id:'sack',t:'감독 경질, 팀 내 불화',b:'감독이 경질되고 라커룸 분위기가 어수선합니다. 팀에 남으면 다음 시즌 입지가 흔들릴 수 있습니다.',a:'팀에 남는다',c:'이적을 택한다'}}
 const fan=!apps?'경기 기록이 없어 팬들의 관심도 줄어들었습니다.':rt>=7.8?pk(['팬들이 당신의 이름을 연호합니다. "올해의 선수 후보!"','커뮤니티가 활약 영상으로 도배됐습니다.']):rt>=6.8?pk(['꾸준한 활약에 팬들은 대체로 만족합니다.','믿고 쓰는 선수라는 평가가 늘었습니다.']):pk(['팬들은 아쉬움을 감추지 못했습니다. 반등이 필요합니다.','팬 커뮤니티에서 비판 여론이 커졌습니다.']);
 s.hs.push({lab:lb,age:old,club:clubNm,apps,g,a,rt:apps?f1(rt):'',rank:`${rank}/${sz}`,o:o1});
 s.rv={lab:lb,club:clubNm,rank:s.rank,o0:o,o1,notes,fan,young:yo,apps,g,a,rt,gk,cs,t0:b0,ms,lvp,SL,head:apps?(gap>=4?'리그를 지배한 시즌':gap>=0?'팀의 핵심 전력이었던 시즌':gap>=-6?'성장 가능성을 보여 준 시즌':'아직 갈 길이 먼 시즌'):'경기에 나서지 못한 시즌',
 rev:apps?`${apps}경기 ${g}골 ${a}도움 · 평균 평점 ${f1(rt)} · 팀 ${s.rank}`:'이번 시즌은 경기에 나서지 못했습니다.',
-chg:s.k.map(k=>[k,before[k],s.st[k]]),nextC:done,force,team,lvp0:rook?1:prevL,nat:s.natRes||[]};s.ph='review';save()}
+chg:s.k.map(k=>[k,before[k],s.st[k]]),nextC:done,force,team,lvp0:rook?1:prevL,nat:s.natRes||[],pay,
+quotes:[fan,yo?pk(['코치진은 프로 계약까지 남은 과제를 차분히 정리해 줬다.','유스 감독: "한 시즌 사이에 몸이 달라졌다."']):lvp>(rook?1:prevL)?pk(['감독: "훈련장에서 보여 준 걸 경기장에서 증명했다."','감독: "이제 팀이 계산에 넣는 선수다."']):lvp<(rook?1:prevL)?pk(['감독: "다시 경쟁해야 한다. 자리는 아무도 보장해 주지 않는다."','코치진은 출전 시간이 줄어든 이유를 수비 가담에서 찾았다.']):pk(['감독: "꾸준함은 가장 과소평가된 재능이다."','코치진은 다음 시즌 역할을 조금 더 넓히겠다고 밝혔다.']),
+rt>=7.6?pk(['현지 매체가 시즌 베스트 경기에 이름을 올렸다.','중계진이 "이 선수 한 명이 경기의 흐름을 바꿨다"고 평가했다.']):rt>=6.6?pk(['현지 매체 평점은 대체로 무난했다.','기록보다 경기 영향력이 더 좋았다는 분석도 나왔다.']):pk(['현지 매체는 "아직 리그 속도에 적응 중"이라고 평가했다.','경기 기록이 적어 평가가 엇갈렸다.'])]};s.ph='review';save()}
 function anim(){const r=s.rv;animMs=[...r.ms];
 render(`<div class="full"><div class="sbox"><div><small>SEASON</small><b>${r.lab}</b></div><div><small>AGE</small><b>${s.age-1}세</b></div></div>
 <div class="orb"><div class="ring"><i></i><i></i><i></i></div><div class="big">${r.young?'U-18 리그':'정규시즌'}<br>진행 중</div><p class="mute">${r.club} · 경기 일정과 선수 기록을 계산하고 있습니다.</p></div>
@@ -637,27 +657,41 @@ render(`<div class="full"><div class="sbox"><div><small>SEASON</small><b>${r.lab
 <div class="live"><div><b id="la">0</b>경기</div><div><b id="lg">0</b>${r.gk?'클린시트':'골'}</div><div><b id="ls">0</b>도움</div><div><b id="lr">-</b>평점</div></div>
 ${r.young?'':`<p class="mute" style="margin:10px 0 0">통산 <b id="ta">${r.t0.apps}</b>경기 · <b id="tg">${r.t0.goals}</b>골 · <b id="tA">${r.t0.ast}</b>도움</p>`}
 <button class="alt mt" onclick="skipSeason()">건너뛰기</button></div>`);
-let p=0;const $=id=>document.getElementById(id);
-iv=setInterval(()=>{p+=2;const f=p/100,ap=Math.round(r.apps*f),gg=Math.round(r.g*f),aa=Math.round(r.a*f);
+let p=0,pz=false;const $=id=>document.getElementById(id);window._cu=()=>{closeModal();pz=false};
+iv=setInterval(()=>{if(pz)return;
+if(!r.young&&r.lvp>r.lvp0&&!r.cu&&p>=50){r.cu=1;pz=true;save();modal(`<div class="eye">엔트리 변동 · ${r.lvp===3?'FIRST TEAM CALL-UP':'ROTATION'}</div><h2>${r.lvp===3?'1군 주전 도약':'로테이션 진입'}</h2><p class="mute">코칭스태프가 최근 기량을 인정해 ${POSL[r.lvp]} 자리를 맡깁니다.</p><div class="swap"><div><small>이전</small><b>${POSL[r.lvp0]}</b></div><i>→</i><div class="on"><small>새 역할</small><b>${POSL[r.lvp]}</b></div></div><button class="w" onclick="_cu()">확인 ✓</button>`);return}
+p+=2;const f=p/100,ap=Math.round(r.apps*f),gg=Math.round(r.g*f),aa=Math.round(r.a*f);
 $('pb').style.width=p+'%';document.querySelectorAll('#ch span').forEach((e,i)=>e.className=i<f*4?'on':'');
 $('la').textContent=ap;$('lg').textContent=r.gk?Math.round(r.cs*f):gg;$('ls').textContent=aa;if(ap)$('lr').textContent=f1(cl(r.rt+(Math.sin(p)*.3)*(1-f),5,9.9));
 if(!r.young){$('ta').textContent=r.t0.apps+ap;$('tg').textContent=r.t0.goals+gg;$('tA').textContent=r.t0.ast+aa}
 while(animMs.length&&animMs[0].at<=f){const m=animMs.shift();toast(m.t,m.sub,m.c)}
-if(p>=100){clearInterval(iv);later(review,500)}},80)}
-function skipSeason(){animMs.forEach(m=>toast(m.t,m.sub,m.c));animMs=[];review()}
+if(p>=100){clearInterval(iv);later(()=>natFlow(0),500)}},80)}
+function skipSeason(){animMs.forEach(m=>toast(m.t,m.sub,m.c));animMs=[];natFlow(0)}
+// ── 국가대표 대회 화면 ──
+const NST=['조별리그','16강','8강','4강','결승'],natStage=v=>({'조별리그 탈락':0,'16강':1,'8강':2,'4강':3,'준우승':4,'우승':4,'8강 탈락':2,'4강 탈락':3,'은메달':4,'금메달':4,'동메달':3})[v]??0;
+function natFlow(i){const r=s.rv,list=(r.nat||[]).filter(x=>['FIFA 월드컵','아시안게임','올림픽'].includes(x[0])&&x[1]!=='미선발');if(r.natDone||i>=list.length){r.natDone=1;return review()}
+const[n,v]=list[i],st=natStage(v),win=v==='우승'||v==='금메달',yr=2000+(+r.lab.split('/')[1]);
+render(`<div class="full"><div class="eye">${yr} ${n==='아시안게임'?'SEPTEMBER':'SUMMER'} · NATIONAL TEAM</div><div class="big">${n}</div><p class="mute">시즌을 마치고 국가대표 대회에 참가합니다.</p>
+<div class="orb" style="padding:34px 0"><div class="ring"><i></i><i></i><i></i></div><div style="font-size:56px;position:relative">${win?'🥇':'⚽'}</div></div>
+<div class="tchips c5">${NST.map((x,j)=>`<span id="ns${j}">${x}</span>`).join('')}</div><p class="mute" id="nr" style="margin-top:14px">대회 결과를 계산하고 있습니다.</p>
+<button class="w mt" id="nb" onclick="natFlow(${i+1})" style="visibility:hidden">${i+1<list.length?'다음 대회 →':'시즌 결과 보기 →'}</button></div>`);
+let k=0;const step=()=>{document.getElementById('ns'+k).classList.add('on');if(k<st){k++;later(step,550)}else later(()=>{document.getElementById('nr').innerHTML=`<b style="font-size:24px;color:var(--${win?'yel':'ink'})">${v}</b>`;if(win)toast(`${n} ${v}!`,'대한민국 국가대표','yel');document.getElementById('nb').style.visibility='visible'},600)};later(step,700)}
 function review(){const r=s.rv,L=r.SL,tm=r.team,cb=s.ci!=null?clubBadge(s.tier,s.ci,1):'';render(`<div class="${r.shown?'':'stag'}"><div class="eye">${r.lab} SEASON</div><h2 class="pt">${r.club} 시즌 결과</h2>
 <p class="mute" style="margin:0;display:flex;gap:6px;align-items:center;flex-wrap:wrap">${!r.young&&r.lvp0!==r.lvp?`<span class="chip">${POSL[r.lvp0]}</span>→<span class="chip on">${POSL[r.lvp]}</span>`:`<span class="chip">${r.young?'U-18':POSL[r.lvp]}</span>`} · ${s.style} · ${r.apps}경기</p>
+${!r.young&&r.lvp0!==r.lvp?`<p class="mute" style="margin:6px 0 0">${r.lvp>r.lvp0?'주전 경쟁에서 앞서며 출전 시간을 늘렸습니다.':'경쟁에서 밀려 출전 시간이 줄었습니다. 다음 시즌 반등이 필요합니다.'}</p>`:''}
+${(()=>{const w=r.notes.filter(n=>/^(🏆|⭐)/.test(n));return w.length?`<div class="card awc"><div class="awi">🏆</div><div>${w.map(n=>`<b>${n.slice(2).trim()}</b>`).join('')}</div></div>`:''})()}
 ${callout(r.head,r.rev)}${tiles(L,r.rank)}${details(L)}${ovrBox(r.o0,r.o1,r.shown)}${chgTiles(r.chg,r.shown)}
 ${tm?`<div class="card" style="margin-top:10px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">${cb}<b style="flex:1">${r.club}</b><span class="mute">🏆 통산 ${s.aw.filter(isTeam).length}회</span></div>
 <div class="kvb" style="margin:0 0 8px"><div><small>리그</small><b>${tm.rank}위 / ${tm.sz}</b></div><div><small>승점</small><b>${tm.pts}</b></div></div><p class="mute" style="margin:0">${tm.w}승 ${tm.d}무 ${tm.l}패</p>
 ${tm.cup?`<div class="trow"><span>${tm.cup[0]}</span><b>${tm.cup[1]}</b></div>`:''}${tm.comp?`<div class="trow"><span>${tm.comp[0]}</span><b>${tm.comp[1]}</b></div>`:''}</div>`:''}
 ${r.nat.length?`<div class="card"><h3>국가대표</h3>${r.nat.map(([n,v])=>`<div class="trow"><span>${n}</span><b class="${v==='미선발'?'dn':''}">${v}</b></div>`).join('')}</div>`:''}
-${r.notes.length||r.ms.length?`<div class="card pop"><h3>시즌 소식</h3>${r.notes.map(n=>`<p style="margin:0 0 6px;font-size:14px">${n}</p>`).join('')}${r.ms.filter(m=>m.t!=='팀 내 입지 변화').map(m=>`<p style="margin:0 0 6px;font-size:14px;color:var(--yel)">🎉 ${m.t}</p>`).join('')}</div>`:''}
-${quote(r.fan)}</div>${r.force?'<button class="rdf w" onclick="retire()">은퇴식으로 →</button><p class="mute" style="margin:8px 0 0">더 이상 선수 생활을 이어가기 어렵습니다.</p>':'<button class="w" onclick="afterReview()">다음 →</button>'}
+${r.notes.some(n=>!/^(🏆|⭐)/.test(n))||r.ms.length?`<div class="card pop"><h3>시즌 소식</h3>${r.notes.filter(n=>!/^(🏆|⭐)/.test(n)).map(n=>`<p style="margin:0 0 6px;font-size:14px">${n}</p>`).join('')}${r.ms.filter(m=>m.t!=='팀 내 입지 변화').map(m=>`<p style="margin:0 0 6px;font-size:14px;color:var(--yel)">🎉 ${m.t}</p>`).join('')}</div>`:''}
+${(r.quotes||[r.fan]).map((q,i)=>quote(q,['♥','!','✎'][i])).join('')}
+${r.pay?`<div class="card"><div class="kvb" style="margin:0 0 10px"><div><small>계약 연봉</small><b>${r.pay.sal}억</b></div><div><small>출전 수당</small><b>${r.pay.allow}억</b></div><div><small>우승 보너스</small><b>${r.pay.bonus}억</b></div></div><div class="top"><span class="mute">시즌 총보수</span><b style="font-size:20px">${r.pay.total}억</b></div></div>`:''}</div>${r.force?'<button class="rdf w" onclick="retire()">은퇴식으로 →</button><p class="mute" style="margin:8px 0 0">더 이상 선수 생활을 이어가기 어렵습니다.</p>':'<button class="w" onclick="afterReview()">다음 →</button>'}
 <div class="btns ${r.young||r.force?'':'two'} mt">${r.young||r.force?'':'<button class="rd" onclick="retireAsk()">현역 은퇴</button>'}<button class="alt" onclick="newLife()">새로운 인생 시작</button></div>`);if(!r.shown)revealAnim(()=>{r.shown=1;save()})}
 // ── 특별훈련 (시즌당 1회) ──
-const GMAP={'결정력':'memory','슈팅':'gauge','피지컬':'tug','페이스':'mash','패스':'rondo','드리블':'rhythm','크로스':'cross','체력':'interval','태클':'timing','빌드업':'rondo','공중볼':'gauge','반응속도':'reaction','위치선정':'timing','수비 조율':'memory'};
-const GN={memory:['골대 메모리','골대 8칸에 불이 켜지는 순서를 기억해 같은 순서로 누릅니다.'],gauge:['파워 게이지','버튼(스페이스바)을 누르고 있다가 게이지가 노란 구간에 왔을 때 손을 뗍니다.'],tug:['몸싸움','5초 안에 연타로 수비수를 밀어내 게이지를 끝까지 채웁니다.'],mash:['스프린트','3초 안에 목표 횟수만큼 연타합니다.'],rondo:['론도','공이 오면 술래·수비에게 막히지 않은 동료의 번호를 눌러 패스합니다. 단계마다 2번 시도합니다.'],rhythm:['리듬 드리블','내려오는 화살표가 노란 선에 닿을 때 같은 방향키를 누릅니다.'],cross:['크로스 타이밍','움직이는 공격수(노란 구간)에 마커가 겹칠 때 멈춥니다.'],interval:['인터벌','2초 연타 + 1초 휴식을 2세트. 단계마다 목표 횟수가 늘어납니다.'],timing:['타이밍','마커가 노란 구간(2점)이나 초록 구간(1점)에 올 때 멈춥니다.'],reaction:['반응 세이브','골대 칸에 공이 나타나면 재빨리 누릅니다. 단계마다 2번, 제한 시간은 점점 짧아집니다.']};
+const GMAP={'결정력':'memory','슈팅':'gauge','피지컬':'tug','페이스':'mash','패스':'rondo','드리블':'rhythm','크로스':'trace','체력':'interval','태클':'timing','빌드업':'rondo','공중볼':'gauge','반응속도':'reaction','위치선정':'timing','수비 조율':'memory'};
+const GN={memory:['골대 메모리','골대 8칸에 불이 켜지는 순서를 기억해 같은 순서로 누릅니다.'],gauge:['파워 게이지','버튼(스페이스바)을 누르고 있다가 게이지가 노란 구간에 왔을 때 손을 뗍니다.'],tug:['몸싸움','5초 안에 연타로 수비수를 밀어내 게이지를 끝까지 채웁니다.'],mash:['스프린트','3초 안에 목표 횟수만큼 연타합니다.'],rondo:['론도','공이 오면 술래·수비에게 막히지 않은 동료의 번호를 눌러 패스합니다. 단계마다 2번 시도합니다.'],rhythm:['리듬 드리블','내려오는 화살표가 노란 선에 닿을 때 같은 방향키를 누릅니다.'],trace:['크로스 궤적','시작점을 누른 채 파란 길을 따라 끝까지 이동합니다. 3초 안에 도착하면 2점, 60% 이상 가면 1점입니다.'],cross:['크로스 타이밍','움직이는 공격수(노란 구간)에 마커가 겹칠 때 멈춥니다.'],interval:['인터벌','2초 연타 + 1초 휴식을 2세트. 단계마다 목표 횟수가 늘어납니다.'],timing:['타이밍','마커가 노란 구간(2점)이나 초록 구간(1점)에 올 때 멈춥니다.'],reaction:['반응 세이브','골대 칸에 공이 나타나면 재빨리 누릅니다. 단계마다 2번, 제한 시간은 점점 짧아집니다.']};
 function spStart(){if(s.spY===s.y)return prep();modal(`<div class="top"><div><span class="tag g">${lab()} 시즌</span> <span class="mute">· 시즌당 1회</span><h2 style="margin:6px 0 0">특별훈련</h2></div><button class="alt sm" onclick="closeModal()">닫기</button></div>
 <div class="callout"><b>훈련할 능력치를 선택하세요.</b><p>시즌마다 1회 가능하며, 능력치마다 훈련 방식이 다릅니다.</p></div>
 <div class="list">${s.k.map(k=>`<button class="li big" onclick="spIntro('${k}')"><span><b>${k} 강화 훈련</b><small>${GN[GMAP[k]][0]}</small></span><b style="font-size:17px">${f1(s.st[k])}</b></button>`).join('')}</div>
@@ -669,39 +703,59 @@ function spIntro(k){const g=GMAP[k];modal(`<div class="top"><h2 style="margin:0;
 <button class="w" onclick="closeModal();spPick('${k}')">훈련 시작 →</button>`)}
 function spPick(k){s.spY=s.y;save();tr={k,g:GMAP[k],r:0,pts:[]};spRound()}
 const spSum=()=>tr.pts.reduce((a,b)=>a+b,0);
-const spCard=body=>`<div class="card"><div class="top" style="align-items:center"><h2 style="margin:0">SPECIAL TRAINING</h2><span class="mute">${GN[tr.g][0]} · ${tr.k}</span></div>
+const spCard=body=>`<div><div class="top" style="align-items:center"><h2 style="margin:0">SPECIAL TRAINING</h2><button class="alt sm" onclick="spEnd()">닫기</button></div><p class="mute" style="margin:2px 0 0">${GN[tr.g][0]} · ${tr.k}</p>
 <div class="top" style="margin-top:12px"><b>특별훈련 · ${Math.min(5,tr.r+1)} / 5</b><b><span style="font-size:20px">${spSum()}</span><span class="mute"> / 10점</span></b></div>
 <div class="rchips">${[0,1,2,3,4].map(i=>`<span class="${i===tr.r?'now':''}">${i+1}회 ${i<tr.pts.length?tr.pts[i]+'점':'—'}</span>`).join('')}</div>
-<p class="mute" style="margin:8px 0 0;font-size:13px">${GN[tr.g][1]}</p>${body}<div class="fb" id="fb"></div></div>`;
-function spRound(){tr.lock=false;({timing:()=>timing(0),cross:()=>timing(1),gauge,mash,interval,memory,rondo,rhythm,tug,reaction})[tr.g]()}
+<p class="mute" style="margin:8px 0 0;font-size:13px">${GN[tr.g][1]}</p><div id="spb">${body}</div><div class="fb" id="fb"></div><div id="nx"></div></div>`;
+function spRender(h){stop();modal(h)}
+function spRound(){tr.lock=false;({timing:()=>timing(0),cross:()=>timing(1),trace,gauge,mash,interval,memory,rondo,rhythm,tug,reaction})[tr.g]()}
 function spNext(pt){if(tr.done)return;tr.lock=true;kh=null;ku=null;cancelAnimationFrame(raf);tr.pts.push(pt);tr.r++;const fb=document.getElementById('fb');if(fb){fb.textContent=['실패 · 0점','좋아요 · 1점','완벽! · 2점'][pt];fb.style.color=`var(--${['red','cy','g'][pt]})`}
-if(tr.r>=5){tr.done=true;later(spEnd,700)}else later(spRound,700)}
+const b=document.getElementById('spb');if(b){b.style.pointerEvents='none';b.style.opacity='.55'}const nx=document.getElementById('nx');if(nx)nx.innerHTML=`<button class="w" onclick="spGo()">${tr.r>=5?'훈련 결과 보기':`다음 시도 · ${tr.r+1} / 5`}<small>키보드: Enter</small></button>`;
+kh=e=>{if(e.code==='Enter'||e.code==='NumpadEnter'){e.preventDefault();spGo()}}}
+function spGo(){if(!tr)return;if(tr.r>=5){tr.done=true;return spEnd()}spRound()}
 const spaceKey=fn=>e=>{if(e.code==='Space'){e.preventDefault();fn()}};
 function timing(mv){const r=tr.r,gw=Math.max(7,14-r*2),bw=gw+16,g0=R(12,88-gw);tr.z={gl:g0,gw,bw};tr.pos=0;
-render(spCard(`<div class="tb"><i class="bz" id="bz"></i><i class="gz" id="gz"></i><i class="mk" id="mk"></i></div><button class="w" onclick="spStop()">STOP (스페이스바)</button>`));
+spRender(spCard(`<div class="tb"><i class="bz" id="bz"></i><i class="gz" id="gz"></i><i class="mk" id="mk"></i></div><button class="w" onclick="spStop()">STOP (스페이스바)</button>`));
 const t0=performance.now(),sp=.0008+r*.0002,bz=document.getElementById('bz'),gz=document.getElementById('gz'),m=document.getElementById('mk');
 const f=n=>{const t=n-t0;tr.pos=(1-Math.abs((t*sp)%2-1))*100;if(mv)tr.z.gl=cl(g0+Math.sin(t/420)*22,2,98-gw);const z=tr.z,bl=Math.max(0,z.gl-8);
 bz.style.left=bl+'%';bz.style.width=z.bw+'%';gz.style.left=z.gl+'%';gz.style.width=z.gw+'%';m.style.left=tr.pos+'%';raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f);kh=spaceKey(spStop)}
 function spStop(){if(tr.lock)return;const z=tr.z,p=tr.pos,bl=Math.max(0,z.gl-8);spNext(p>=z.gl&&p<=z.gl+z.gw?2:p>=bl&&p<=bl+z.bw?1:0)}
 function gauge(){const r=tr.r,gw=Math.max(6,12-r*1.5),gl=R(55,92-gw);tr.z={gl,gw};tr.v=0;tr.hold=false;
-render(spCard(`<div class="gg"><i class="gz" style="left:${gl}%;width:${gw}%;opacity:.8"></i><i class="fill" id="gf"></i></div><button class="w" id="hb">꾹 누르고 있다가 떼기</button>`));
+spRender(spCard(`<div class="gg"><i class="gz" style="left:${gl}%;width:${gw}%;opacity:.8"></i><i class="fill" id="gf"></i></div><button class="w" id="hb">꾹 누르고 있다가 떼기</button>`));
 const hb=document.getElementById('hb'),gf=document.getElementById('gf'),dur=1150-r*130;
 const start=()=>{if(tr.hold||tr.lock)return;tr.hold=true;const t0=performance.now();const f=n=>{tr.v=(n-t0)/dur*100;gf.style.width=Math.min(100,tr.v)+'%';if(tr.v>=100)return rel();raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f)};
 const rel=()=>{if(!tr.hold||tr.lock)return;const v=tr.v,z=tr.z;spNext(v>=z.gl&&v<=z.gl+z.gw?2:v>=z.gl-8&&v<=z.gl+z.gw+6&&v<100?1:0)};
 hb.addEventListener('pointerdown',e=>{e.preventDefault();start()});['pointerup','pointerleave','pointercancel'].forEach(ev=>hb.addEventListener(ev,rel));
 kh=spaceKey(start);ku=e=>{if(e.code==='Space')rel()}}
+const PATHS=[['가로선',[[15,50],[85,50]]],['ㄴ',[[28,16],[28,80],[84,80]]],['ㄷ',[[80,20],[22,20],[22,80],[80,80]]],['ㅇ',Array.from({length:41},(_,i)=>{const a=-Math.PI/2+i/40*Math.PI*2;return[50+32*Math.cos(a),50+32*Math.sin(a)]})],['W',[[12,18],[30,82],[50,36],[70,82],[88,18]]]];
+function trace(){const[nm,pts]=PATHS[tr.r],segs=[];let L=0;for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],l=Math.hypot(b[0]-a[0],b[1]-a[1]);segs.push({a,b,l,s:L});L+=l}
+const dd='M'+pts.map(q=>q.map(v=>v.toFixed(1)).join(' ')).join(' L'),e0=pts[pts.length-1],TOL=8;let prog=0,on=false,t0=0,fin=false;
+spRender(spCard(`<div class="top" style="margin-top:8px"><b id="tt">3.00<span class="mute"> 초</span></b><span class="mute" id="tq">0% · 경로 진행</span></div>
+<svg class="trc" id="trc" viewBox="0 0 100 100"><path d="${dd}" class="tw"/><path d="${dd}" class="tc"/><path d="${dd}" class="td" id="tdn" pathLength="1" stroke-dasharray="0 1"/><circle cx="${e0[0]}" cy="${e0[1]}" r="4" class="te"/><circle cx="${pts[0][0]}" cy="${pts[0][1]}" r="4" class="ts"/><text x="${pts[0][0]}" y="${pts[0][1]-7}" class="tl">${nm==='ㅇ'?'시작·도착':'시작'}</text>${nm==='ㅇ'?'':`<text x="${e0[0]}" y="${e0[1]-7}" class="tl">도착</text>`}</svg>
+<p class="mute" id="tm" style="text-align:center;margin:0">${nm} · 시작점을 누르면 3초가 시작됩니다</p>`));
+const sv=document.getElementById('trc'),dn=document.getElementById('tdn'),tq=document.getElementById('tq'),tt=document.getElementById('tt'),tm=document.getElementById('tm');
+const P2=e=>{const r=sv.getBoundingClientRect();return[(e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100]};
+const end=(pt,msg)=>{if(fin)return;fin=true;on=false;tm.textContent=msg;spNext(pt)};
+const part=()=>prog/L>=.6?1:0;
+sv.addEventListener('pointerdown',e=>{if(fin||on)return;const q=P2(e);if(Math.hypot(q[0]-pts[0][0],q[1]-pts[0][1])>10){tm.textContent='노란·하늘색 시작점에서 출발하세요';return}
+on=true;t0=performance.now();sv.setPointerCapture(e.pointerId);tm.textContent='파란 길을 따라 도착까지!';const f=n=>{if(!on)return;const left=Math.max(0,3-(n-t0)/1000);tt.innerHTML=left.toFixed(2)+'<span class="mute"> 초</span>';if(left<=0)return end(part(),'시간 초과 · '+(part()?'1점':'0점'));raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f)});
+sv.addEventListener('pointermove',e=>{if(!on)return;const q=P2(e);let best=null;segs.forEach(g=>{const dx=g.b[0]-g.a[0],dy=g.b[1]-g.a[1],u=cl(((q[0]-g.a[0])*dx+(q[1]-g.a[1])*dy)/(g.l*g.l),0,1),x=g.a[0]+dx*u,y=g.a[1]+dy*u,d2=Math.hypot(q[0]-x,q[1]-y),sp=g.s+g.l*u;
+if(d2<TOL&&sp>=prog-6&&(!best||Math.abs(sp-prog)<Math.abs(best-prog)))best=sp});
+if(best==null)return end(part(),'파란 구간을 벗어났어요 · '+(part()?'1점':'0점'));if(best-prog<20)prog=Math.max(prog,best);
+dn.setAttribute('stroke-dasharray',`${(prog/L).toFixed(3)} 1`);tq.textContent=Math.round(prog/L*100)+'% · 경로 진행';if(prog>=L*.97)end(2,'도착했어요! 성공 · 2점')});
+const up=()=>{if(on)end(part(),'손을 뗐어요 · '+(part()?'1점':'0점'))};sv.addEventListener('pointerup',up);sv.addEventListener('pointercancel',up)}
 function mash(){const tg=[12,15,18,21,24][tr.r];tr.n=0;tr.on=false;tr.tg=tg;
-render(spCard(`<div class="big res" id="cn" style="color:var(--or)">0 / ${tg}</div><div class="bar" style="height:10px"><i id="mt" style="width:0%;background:var(--or)"></i></div><button class="w mt" id="mb" onclick="mashHit()">시작</button>`));kh=spaceKey(mashHit)}
+spRender(spCard(`<div class="big res" id="cn" style="color:var(--or)">0 / ${tg}</div><div class="bar" style="height:10px"><i id="mt" style="width:0%;background:var(--or)"></i></div><button class="w mt" id="mb" onclick="mashHit()">시작</button>`));kh=spaceKey(mashHit)}
 function mashHit(){if(tr.lock)return;if(!tr.on){tr.on=true;document.getElementById('mb').textContent='연타!';const t0=performance.now(),mt=document.getElementById('mt');
 const f=n=>{const p=(n-t0)/3000;mt.style.width=Math.min(100,p*100)+'%';if(p>=1)return spNext(tr.n>=tr.tg?2:tr.n>=tr.tg*.7?1:0);raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f);return}
 tr.n++;document.getElementById('cn').textContent=tr.n+' / '+tr.tg}
 function interval(){const tg=[8,9,10,11,12][tr.r];Object.assign(tr,{tg,set:0,ok:0,n:0,on:false,go:false});
-render(spCard(`<div class="mute" id="is" style="text-align:center;margin-top:10px">세트당 2초 안에 ${tg}회 · 2세트</div><div class="big res" id="cn" style="color:var(--or)">0 / ${tg}</div><button class="w" id="mb" onclick="ivHit()">시작</button>`));kh=spaceKey(ivHit)}
+spRender(spCard(`<div class="mute" id="is" style="text-align:center;margin-top:10px">세트당 2초 안에 ${tg}회 · 2세트</div><div class="big res" id="cn" style="color:var(--or)">0 / ${tg}</div><button class="w" id="mb" onclick="ivHit()">시작</button>`));kh=spaceKey(ivHit)}
 function ivHit(){if(tr.lock)return;if(!tr.go){tr.go=true;document.getElementById('mb').textContent='연타!';return ivSet()}if(!tr.on)return;tr.n++;document.getElementById('cn').textContent=tr.n+' / '+tr.tg}
 function ivSet(){tr.on=true;tr.n=0;document.getElementById('cn').textContent='0 / '+tr.tg;const is=document.getElementById('is');is.textContent=`${tr.set+1}세트 — 연타!`;is.style.color='var(--g)';
 later(()=>{tr.on=false;if(tr.n>=tr.tg)tr.ok++;tr.set++;if(tr.set>=2)return spNext(tr.ok);is.textContent=`휴식… (1세트 ${tr.ok?'성공':'실패'})`;is.style.color='var(--mute)';later(ivSet,1000)},2000)}
 function memory(){const n=[2,3,3,4,5][tr.r];tr.seq=Array.from({length:n},()=>R(0,7));tr.inp=[];tr.ready=false;
-render(spCard(`<p class="mute" id="mm" style="text-align:center;margin:10px 0 0">순서를 기억하세요 (${n}칸)</p><div class="mg">${Array.from({length:8},(_,i)=>`<b id="c${i}" onclick="spCell(${i})">${i+1}</b>`).join('')}</div>`));
+spRender(spCard(`<p class="mute" id="mm" style="text-align:center;margin:10px 0 0">순서를 기억하세요 (${n}칸)</p><div class="mg">${Array.from({length:8},(_,i)=>`<b id="c${i}" onclick="spCell(${i})">${i+1}</b>`).join('')}</div>`));
 let i=0;const seq=tr.seq,step=()=>{for(let j=0;j<8;j++)document.getElementById('c'+j).classList.remove('on');
 if(i<n){const e=document.getElementById('c'+seq[i]);e.classList.add('on');i++;later(()=>{e.classList.remove('on');later(step,250)},600)}else{tr.ready=true;document.getElementById('mm').textContent='같은 순서로 눌러 보세요! (숫자키 1~8)'}};later(step,500);
 kh=e=>{const v=+e.key;if(v>=1&&v<=8)spCell(v-1)}}
@@ -713,7 +767,7 @@ function rondoAtt(){const[n,dn,who]=RONDO[tr.r],tl=[2400,2100,1900,1800,1500][tr
 const tot=n+1,pos=Array.from({length:tot},(_,j)=>{const a=Math.PI/2+j*2*Math.PI/tot;return[50+40*Math.cos(a),50+40*Math.sin(a)]});
 let h=`<b class="me" style="left:${pos[0][0]}%;top:${pos[0][1]}%">나 ⚽</b>`;
 for(let j=1;j<=n;j++){h+=`<button class="rp${blk.has(j)?' mk':''}" style="left:${pos[j][0]}%;top:${pos[j][1]}%" onclick="rdPick(${j})">${j}</button>`;if(blk.has(j))h+=`<i class="df" style="left:${(pos[0][0]+pos[j][0]*1.4)/2.4}%;top:${(pos[0][1]+pos[j][1]*1.4)/2.4}%">${who==='술래'?'술래':'DF'}</i>`}
-render(spCard(`<p class="mute" style="text-align:center;margin:10px 0 0">팀원 ${n}명 · ${who} ${dn}명 · 시도 ${tr.att+1}/2 · 성공 ${tr.ok}</p><div class="rdb">${h}</div><div class="bar"><i id="rt" style="width:100%;background:var(--cy)"></i></div>`));
+spRender(spCard(`<p class="mute" style="text-align:center;margin:10px 0 0">팀원 ${n}명 · ${who} ${dn}명 · 시도 ${tr.att+1}/2 · 성공 ${tr.ok}</p><div class="rdb">${h}</div><div class="bar"><i id="rt" style="width:100%;background:var(--cy)"></i></div>`));
 const t0=performance.now(),rt=document.getElementById('rt');const f=t=>{const p=(t-t0)/tl;rt.style.width=Math.max(0,100-p*100)+'%';if(p>=1)return rdRes(false,'시간 초과');raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f);
 kh=e=>{const v=+e.key;if(v>=1&&v<=n)rdPick(v)}}
 function rdPick(j){if(tr.lock)return;rdRes(!tr.blk.includes(j),tr.blk.includes(j)?'패스 차단!':'')}
@@ -721,7 +775,7 @@ function rdRes(ok,why){tr.lock=true;kh=null;cancelAnimationFrame(raf);if(ok)tr.o
 later(()=>{if(tr.att>=2){tr.lock=false;spNext(tr.ok)}else rondoAtt()},600)}
 const ARW=['←','↓','↑','→'];
 function rhythm(){const r=tr.r,cnt=r>=3?5:4,travel=1600-r*170,gp=650-r*60;tr.notes=Array.from({length:cnt},(_,j)=>({l:R(0,3),t:700+j*gp}));tr.hits=0;tr.cnt=cnt;tr.travel=travel;
-render(spCard(`<div class="rh" id="rh"><i class="ln"></i><i class="ln"></i><i class="ln"></i><i class="ln"></i><i class="hl"></i>${tr.notes.map((q,j)=>`<i class="nt l${q.l}" id="n${j}">${ARW[q.l]}</i>`).join('')}</div><div class="arw">${ARW.map((a,l)=>`<button class="alt" onpointerdown="rhHit(${l})">${a}</button>`).join('')}</div>`));
+spRender(spCard(`<div class="rh" id="rh"><i class="ln"></i><i class="ln"></i><i class="ln"></i><i class="ln"></i><i class="hl"></i>${tr.notes.map((q,j)=>`<i class="nt l${q.l}" id="n${j}">${ARW[q.l]}</i>`).join('')}</div><div class="arw">${ARW.map((a,l)=>`<button class="alt" onpointerdown="rhHit(${l})">${a}</button>`).join('')}</div>`));
 tr.t0=performance.now();const f=n=>{const t=n-tr.t0;let alive=false;tr.notes.forEach((q,j)=>{const y=(t-q.t)/travel,e=document.getElementById('n'+j);
 if(!q.h&&y<1.3)alive=true;if(q.h||y<0||y>1.3){e.style.display='none';return}e.style.display='block';e.style.top=(y*85)+'%';if(y>1.15&&!q.miss){q.miss=1;e.classList.add('miss')}});
 if(!alive)return spNext(tr.hits>=tr.cnt?2:tr.hits>=Math.ceil(tr.cnt/2)?1:0);raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f);
@@ -729,22 +783,22 @@ kh=e=>{const l={ArrowLeft:0,ArrowDown:1,ArrowUp:2,ArrowRight:3}[e.code];if(l==nu
 function rhHit(l){if(tr.lock)return;const t=performance.now()-tr.t0;let best=null,bd=.16;tr.notes.forEach(q=>{if(q.h||q.miss||q.l!==l)return;const dd=Math.abs((t-q.t)/tr.travel-1);if(dd<bd){bd=dd;best=q}});
 const fb=document.getElementById('fb');if(best){best.h=1;tr.hits++;fb.textContent=`HIT ${tr.hits}/${tr.cnt}`;fb.style.color='var(--g)'}else{fb.textContent='MISS';fb.style.color='var(--red)'}}
 function tug(){tr.v=50;tr.on=false;tr.pull=[10,12,14,16,18][tr.r];
-render(spCard(`<div class="tg"><i id="tgv"></i></div><div class="top mute"><span>밀림</span><span>밀어내기 성공</span></div><button class="w mt" id="mb" onclick="tgHit()">시작</button>`));kh=spaceKey(tgHit)}
+spRender(spCard(`<div class="tg"><i id="tgv"></i></div><div class="top mute"><span>밀림</span><span>밀어내기 성공</span></div><button class="w mt" id="mb" onclick="tgHit()">시작</button>`));kh=spaceKey(tgHit)}
 function tgHit(){if(tr.lock)return;if(!tr.on){tr.on=true;document.getElementById('mb').textContent='밀어붙여!';const t0=performance.now(),el=document.getElementById('tgv');let last=t0;
 const f=n=>{tr.v-=tr.pull*(n-last)/1000;last=n;el.style.width=cl(tr.v,0,100)+'%';if(tr.v>=100)return spNext(2);if(tr.v<=0||n-t0>5000)return spNext(tr.v>=60?1:0);raf=requestAnimationFrame(f)};raf=requestAnimationFrame(f);return}tr.v=Math.min(100,tr.v+4.5)}
 function reaction(){tr.att=0;tr.ok=0;rcAtt()}
 function rcAtt(){const win=[1000,850,720,600,500][tr.r];tr.tgt=-1;tr.lock=true;
-render(spCard(`<p class="mute" style="text-align:center;margin:10px 0 0">시도 ${tr.att+1}/2 · 막아낸 슛 ${tr.ok}</p><div class="mg">${Array.from({length:8},(_,i)=>`<b id="c${i}" onclick="rcPick(${i})">${i+1}</b>`).join('')}</div>`));
+spRender(spCard(`<p class="mute" style="text-align:center;margin:10px 0 0">시도 ${tr.att+1}/2 · 막아낸 슛 ${tr.ok}</p><div class="mg">${Array.from({length:8},(_,i)=>`<b id="c${i}" onclick="rcPick(${i})">${i+1}</b>`).join('')}</div>`));
 later(()=>{tr.tgt=R(0,7);tr.lock=false;const e=document.getElementById('c'+tr.tgt);e.classList.add('on');e.textContent='⚽';later(()=>{if(!tr.lock)rcRes(false)},win)},R(600,1500));
 kh=e=>{const v=+e.key;if(v>=1&&v<=8)rcPick(v-1)}}
 function rcPick(i){if(tr.lock||tr.tgt<0)return;rcRes(i===tr.tgt)}
 function rcRes(ok){tr.lock=true;kh=null;if(ok)tr.ok++;tr.att++;const fb=document.getElementById('fb');fb.textContent=ok?'선방!':'실점';fb.style.color=`var(--${ok?'g':'red'})`;
 later(()=>{if(tr.att>=2){tr.lock=false;spNext(tr.ok)}else rcAtt()},600)}
-function spEnd(){const t=spSum(),cur=s.st[tr.k],m=cur<12?1:cur<16?.75:cur<20?.5:.3,gain=r1(t*.1*m);bump(tr.k,gain);log(`특별훈련(${GN[tr.g][0]}) ${t}/10점 · ${tr.k} +${f1(gain)}`,'특훈','v');
-render(`<div class="card"><div class="top" style="align-items:center"><h2 style="margin:0">훈련 결과</h2><span class="mute">${GN[tr.g][0]}</span></div>
+function spEnd(){if(!tr)return;stop();const t=spSum(),cur=s.st[tr.k],m=cur<12?1:cur<16?.75:cur<20?.5:.3,gain=r1(t*.1*m);bump(tr.k,gain);log(`특별훈련(${GN[tr.g][0]}) ${t}/10점 · ${tr.k} +${f1(gain)}`,'특훈','v');
+modal(`<div><div class="top" style="align-items:center"><h2 style="margin:0">훈련 결과</h2><span class="mute">${GN[tr.g][0]}</span></div>
 <div class="rchips">${tr.pts.map((x,i)=>`<span>${i+1}회 ${x}점</span>`).join('')}</div>
 <div class="resg"><span>${tr.k}</span><div><b>+${f1(gain)}</b><small>${t}점 × 0.1${m<1?` × ${m}`:''}</small></div></div>
-<div class="top" style="margin:4px 0 14px"><span class="mute">현재 ${tr.k}</span><b>${f1(s.st[tr.k])}</b></div><button class="w" onclick="prep()">시즌 준비로 →</button></div>`);tr=null}
+<div class="top" style="margin:4px 0 14px"><span class="mute">현재 ${tr.k}</span><b>${f1(s.st[tr.k])}</b></div><button class="w" onclick="closeModal();prep()">시즌 준비로 →</button></div>`);tr=null}
 // ── 은퇴 ──
 function retireAsk(){const back=s.ph;render(`<div class="card res"><div class="big" style="color:var(--red)">현역 은퇴</div><p>${s.age}세, ${cn()}에서 선수 생활을 마칩니다. 은퇴하면 되돌릴 수 없습니다.</p><div class="btns two"><button class="rdf" onclick="retire()">은퇴한다</button><button class="alt" onclick="RES['${back}']()">계속 뛴다</button></div></div>`+sheet())}
 function retire(){const tally={};s.aw.forEach(a=>tally[a]=(tally[a]||0)+1);const ac=Object.entries(tally).map(([k,v])=>v>1?`${k} ×${v}`:k),o=ovr(s);
