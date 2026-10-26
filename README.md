@@ -2,6 +2,10 @@
 
 U15 유망주에서 은퇴까지 이어지는 축구선수 커리어 시뮬레이션 게임입니다. 빌드 과정 없이 `index.html` 하나로 동작합니다.
 
+## 플레이 주소
+
+https://20261220-commits.github.io/Football-Life/
+
 ## 실행
 
 `index.html`을 브라우저로 열면 바로 플레이할 수 있습니다. 저장 기록은 브라우저의 localStorage에만 남습니다.
