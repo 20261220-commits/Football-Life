@@ -1,7 +1,7 @@
 // 오프라인 플레이용 서비스 워커
 // - 게임 화면(index.html): 인터넷이 되면 최신 버전을 받아 저장하고, 안 되면 저장된 버전으로 엽니다.
 // - 아이콘·엠블럼·글꼴: 저장된 것이 있으면 바로 쓰고, 없으면 받아서 저장합니다.
-const V = 'fl-v2';
+const V = 'fl-v3';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 
 self.addEventListener('install', e => {

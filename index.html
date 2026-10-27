@@ -336,6 +336,25 @@ textarea.code{width:100%;min-height:110px;margin-top:10px;padding:10px;border-ra
 .mpf{position:absolute;inset:0;clip-path:polygon(11% 0,89% 0,100% 100%,0 100%);background:repeating-linear-gradient(180deg,#2f8a3c 0 12.5%,#287a34 12.5% 25%),#2f8a3c}
 .mpf::before{content:"";position:absolute;left:31%;right:31%;bottom:0;height:17%;border:1.5px solid rgba(255,255,255,.55);border-bottom:0}.mpf::after{content:"";position:absolute;left:39%;right:39%;top:0;height:10%;border:1.5px solid rgba(255,255,255,.45);border-top:0}
 .mpi i{position:absolute;width:9.5%;height:auto;aspect-ratio:1;border-radius:50%;background:#f6f1e4;transform:translate(-50%,-50%);box-shadow:0 1px 2px rgba(0,0,0,.45);z-index:1}
+
+/* 한 화면에 들어오도록: 간격 압축 */
+body{font-size:14.5px}.wrap{padding-block:10px 28px}.card{padding:13px;margin-bottom:8px}.pt{font-size:21px}button{padding:11px 12px}
+.kv div{padding:6px 9px}.tiles div{padding:8px 2px}.tiles b{font-size:18px}.trow{padding:8px 10px;margin-top:5px;font-size:13.5px}.callout{margin:8px 0;padding:8px 12px}
+.ovrc{margin:8px 0 5px;padding:8px 12px}details.det{margin:5px 0 3px;padding:8px 12px}
+.hd2{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-bottom:8px}.hd2 .chip{white-space:nowrap}
+.cpt{padding:11px 12px}.crow{display:flex;align-items:center;gap:10px}.cgrow{flex:1;min-width:0}.cgrow b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cgrow small{display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kv4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}.kv4 div{background:var(--bg);border-radius:8px;padding:6px 4px;text-align:center;min-width:0}.kv4 small{display:block;font-size:10.5px;color:var(--mute)}.kv4 b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.g2>.card{margin-bottom:0}.g2:has(>.card:only-child){grid-template-columns:1fr}.g2+*{margin-top:8px}
+.mini{display:flex;flex-direction:column;gap:3px;min-width:0}.mini>b{font-size:14.5px}.ell{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.mini .rvbar{margin:4px 0 0}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:6px;margin:8px 0 0}.acts button{padding:9px 4px;font-size:13.5px;font-weight:600}.acts small{font-size:11px;font-weight:400}
+.actbar{position:sticky;bottom:0;z-index:5;margin-top:10px;padding:10px 0 calc(8px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 28%)}
+.minor{display:flex;justify-content:center;gap:18px}.lnk{background:none;border:0;padding:6px 4px;font-size:13px;font-weight:500;color:var(--mute);text-decoration:underline;text-underline-offset:3px}.lnk.dn{color:var(--red)}
+.awl{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 6px}.awl span{border:1px solid rgba(216,183,90,.5);background:color-mix(in srgb,var(--yel) 9%,transparent);border-radius:999px;padding:3px 10px;font-size:12.5px}
+.natl{display:flex;gap:6px;overflow-x:auto;margin:8px 0}.natl span{flex:1;min-width:84px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 8px;text-align:center}.natl small{display:block;font-size:10.5px;color:var(--mute)}.natl b{font-size:13px}
+.news2 h3{margin:0 0 4px}.news2 p{margin:0;padding:3px 0;font-size:13px}.news2 details summary{font-size:12.5px;cursor:pointer;padding-top:4px}
+.qts p{display:flex;gap:8px;margin:0;padding:4px 0;font-size:12.5px;color:var(--mute)}.qts .qi{margin-top:1px}
+.payl{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:4px 2px}.payl b{font-size:17px}.payl small{margin-left:auto}
+.ofc .ofm{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:8px 0 2px}.ofm b{font-size:16px}.ofq{margin:2px 0 6px;font-size:12.5px;font-style:italic;color:var(--mute)}.ofc button.sm{padding:7px 16px}
 @media (max-width:380px){.tiles.n5{grid-template-columns:repeat(3,1fr)}.seg.s4{grid-template-columns:repeat(2,1fr)}}
 @media (prefers-reduced-motion:reduce){.gcard::after,.env,.spin,.tr,.rs{animation:none!important}.letter,.env-flap{transition:none!important}.cl,.jsy,.tli,.gcard,.ngr{animation:none!important;opacity:1!important}#toast.in,.pop1,.cd.flip,.cd.flip::after,.cd.hid.shake,.rise,.rise2,.scout .bar i,.ring,.reveal,.revc,.tline .now,.stag .tiles div{animation:none!important}.bar i{transition:none}}
 @media (max-width:380px){.cands{gap:6px}.cd b{font-size:13px}.kv{grid-template-columns:1fr}}
@@ -600,7 +619,7 @@ const fmA=.93+rnd()*.14,fmB=.93+rnd()*.14,frm=(o,k)=>({atk:o.atk*k,mid:o.mid*k,d
 const S=[A.xi.map(x=>({...x})),B.xi.map(x=>({...x}))],BN=[(A.bench||[]).map(x=>({...x})),(B.bench||[]).map(x=>({...x}))],TM=[A,B];
 let a=frm(st(S[0]),fmA),b=frm(st(S[1]),fmB);const ev=[],sc=[0,0],sh=[0,0],on=[0,0],pts=[S[0].map(()=>({g:0,a:0})),S[1].map(()=>({g:0,a:0}))];
 const pick=(sq,wf)=>{const w=sq.map(x=>wf(x)*(x.eff/70)),tot=w.reduce((p,q)=>p+q,0);let r=rnd()*tot;for(let i=0;i<w.length;i++){r-=w[i];if(r<=0)return i}return w.length-1};
-const GW={ST:5,WG:3.6,AM:3,CM:1.6,DM:.8,FB:.7,CB:.6,GK:0},AW={AM:3.2,CM:2.6,WG:2.8,ST:1.6,FB:1.4,DM:1.4,CB:.5,GK:.1};
+const GW={ST:5,WG:3.6,AM:3,CM:1.6,DM:.8,FB:.7,CB:.6,GK:0},AW={AM:3.2,CM:2.6,WG:2.8,ST:1.6,FB:1.4,DM:1.4,CB:.5,GK:.01};
 for(let c=0;c<18;c++){if(c===12){// 60분: 주전 체력 저하, 같은 라인 후보가 더 나으면 최대 3명 교체
 [0,1].forEach(k=>{S[k].forEach(x=>{if(!x.youth)x.eff=r1(x.eff*.96)});let n=0;BN[k].forEach(bp=>{if(n>=3)return;const g=GRP[bp.pos];let wi=-1;S[k].forEach((x,i)=>{if(GRP[x.slot]===g&&x.slot!=='GK'===(bp.pos!=='GK')&&(wi<0||x.eff<S[k][wi].eff))wi=i});
 if(wi>=0&&bp.eff*(bp.pos===S[k][wi].slot?1:.9)>S[k][wi].eff){const out=S[k][wi];S[k][wi]={...bp,slot:out.slot,eff:r1(bp.eff*(bp.pos===out.slot?1:.9))};pts[k][wi]={g:0,a:0,sub:out.name};n++;ev.push({m:60+n,t:k,sub:1,in:bp.name,out:out.name,sc:[...sc]})}})});
@@ -697,18 +716,20 @@ function created(){const p=P[d.pos];modal(`<div class="eye">PLAYER PROFILE · CO
 const HT={GK:186,CB:185,ST:181,DM:178,CM:176,FB:175,AM:174,WG:173};
 function begin(){const p=P[d.pos],st={};p.k.forEach((k,i)=>st[k]=d.a[i]);if(d.bonus)st[d.bonus.k]=r1(cl(st[d.bonus.k]+d.bonus.v,1,30));const orig={name:d.name,num:d.num,foot:d.foot,pos:d.pos,hope:d.hope,school:d.school,c:d.c,ci:d.ci},reg=d.reg||null,bon=d.bonus||null;try{localStorage.removeItem(REGK)}catch(e){}const ht=HT[d.pos]+R(-5,5);
 s={id:uid(),v:4,name:d.name,num:d.num,foot:d.foot,pos:d.pos,k:[...p.k],st,style:d.role,focus:d.f.map(i=>p.k[i]),hope:d.hope,school:d.school,ht,wt:ht-105+R(-4,6),age:15,y:2025,ph:'u15t',
-apps:0,goals:0,ast:0,caps:0,wc:0,fame:0,earn:0,log:[],aw:[],ms:[],hs:[],hist:[],pot:R(52,96),track:'k',tier:0,ci:null,ct:null,sig:null,mil:'none',srv:null,edu:null,
+apps:0,goals:0,ast:0,caps:0,wc:0,fame:0,earn:0,log:[],aw:[],ms:[],hs:[],hist:[],pot:R(52,96),bloom:R(-2,2),track:'k',tier:0,ci:null,ct:null,sig:null,mil:'none',srv:null,edu:null,
 pro:0,seasons:0,lvp:0,rank:null,comp:'없음',pen:0,offer:null,ev:null,rv:null,offers:null,spY:null,spLeft:3,spDone:[],trY:null,reY:null,orig,reg};d={};if(bon)log(`회귀 특별훈련으로 ${bon.k} +${f1(bon.v)}을 안고 다시 시작합니다.`,'회귀','v');
 log(`${s.name}(#${s.num}, ${s.foot}) — ${s.style} 역할로 25/26 U15 시즌에 나섭니다.`,'시작','g');u15T()}
 
 // ── 경기 기록 계산 ──
+// 화면에 보이는 시즌 평균 평점: 내부 경기력 점수(수상·라이벌 판정용)를 완만한 곡선으로 눌러 평균 6점대, 8점대는 최정상 시즌만
+const dispRt=v=>cl(r1(6.4+2.3*Math.tanh((v-6.4)/2.8)),5.5,8.6),seasonRt=(gap,rook)=>cl(r1(6.4+1.45*Math.tanh(gap/15)+rf(-.3,.3)-(rook?.15:0)),5.6,8.5);// seasonRt: 리그 수준 대비 격차로 표시 평점 — 평균 7점 안팎, 8점대는 압도적 격차 + 좋은 시즌만
 function statLine(apps,gap,lvp,big){const p=P[s.pos],gk=s.pos==='GK',perf=cl(1+gap/20,.4,1.8),rr=()=>rf(.7,1.3),rn=()=>rf(.85,1.15),v=k=>20+(s.st[k]||10)*3;
-const min=apps?apps*(big?R(70,88):R(25,65)):0,g=Math.round(apps*p.gs*.5*perf*rr()),a=Math.round(apps*(p.as*.45+.03)*perf*rr()),rt=apps?cl(r1(6.3+gap/7+rf(-.4,.6)-(lvp===1?.2:0)),5.4,9.4):0;
+const min=apps?apps*(big?R(70,88):R(25,65)):0,g=Math.round(apps*p.gs*.5*perf*rr()),a=gk?(Math.random()<apps/38*.15?1:0):Math.round(apps*(p.as*.45+.03)*perf*rr()),rt=apps?cl(r1(6.3+gap/7+rf(-.4,.6)-(lvp===1?.2:0)),5.4,9.4):0,rd=apps?seasonRt(gap,lvp===1):0;
 const pas=v(gk?'빌드업':'패스'),dr=v('드리블'),tk=v(gk?'위치선정':'태클'),sh=({ST:3,WG:2.3,AM:2,CM:1.2,DM:.7,CB:.6,FB:.6,GK:0})[s.pos]*perf*rn(),bc=Math.round(apps*(p.gs+p.as)*.5*perf*rn());
 const dd=({ST:1.2,WG:2.5,AM:2,CM:1.2,DM:.6,CB:.3,FB:1.3,GK:0})[s.pos],df=({ST:.5,WG:.7,AM:.8,CM:1.5,DM:2.2,CB:1.8,FB:1.8,GK:0})[s.pos],cs=Math.round(apps*cl(.22+gap/60,.05,.6));
-const V={'경기':apps,'출전 시간':min+'분','골':g,'도움':a,'평균 평점':apps?f1(rt):'-','xG':f1(g*rf(.8,1.2)+apps*p.gs*.02),'xA':f1(a*rf(.8,1.2)+apps*p.as*.02),'90분당 슛':f1(sh),'90분당 유효 슛':f1(sh*rf(.33,.48)),'빅찬스 형성':bc,'빅찬스 미스':Math.round(bc*rf(.3,.55)),'찬스 형성':Math.round(apps*(p.as*3+.3)*perf*rn()),
+const V={'경기':apps,'출전 시간':min+'분','골':g,'도움':a,'평균 평점':apps?f1(rd):'-','xG':f1(g*rf(.8,1.2)+apps*p.gs*.02),'xA':f1(a*rf(.8,1.2)+apps*p.as*.02),'90분당 슛':f1(sh),'90분당 유효 슛':f1(sh*rf(.33,.48)),'빅찬스 형성':bc,'빅찬스 미스':Math.round(bc*rf(.3,.55)),'찬스 형성':Math.round(apps*(p.as*3+.3)*perf*rn()),
 '90분당 패스':Math.round((22+pas*.55)*(['CB','DM','CM','GK'].includes(s.pos)?1.3:1)),'패스 성공률':cl(Math.round(62+pas*.3+R(-3,3)),60,95)+'%','90분당 드리블':f1(dd*dr/60*rn()),'드리블 성공률':cl(Math.round(40+dr*.4+R(-4,4)),35,80)+'%','90분당 태클':f1(df*tk/60*rn()),'90분당 인터셉트':f1(df*.9*tk/60*rn()),'90분당 슈팅 블록':f1(df*.35*rn()),'클린시트':cs,'선방률':cl(Math.round(66+gap/1.5+R(-4,4)),52,86)+'%','90분당 실점':f1(cl(1.3-gap/30+rf(0,.4),.5,2.4))};
-return{apps,min,g,a,rt,cs,gk,V,stats:LB[GR[s.pos]].map(l=>[l,V[l]])}}
+return{apps,min,g,a,rt,rd,cs,gk,V,stats:LB[GR[s.pos]].map(l=>[l,V[l]])}}
 // 결과 화면 공통 조각
 const callout=(h,p)=>`<div class="callout"><small>SEASON REVIEW</small><b>${h}</b>${p?`<p>${p}</p>`:''}</div>`;
 function tiles(L,rank){const V=L.V,a=L.gk?[['경기',L.apps],['클린시트',L.cs],['선방률',V['선방률']]]:[['경기',L.apps],['골',L.g],['도움',L.a]],
@@ -783,10 +804,10 @@ if(old>=19){let top=0;for(let k=3;k>=1;k--)if(r.o>=T[k].need-2){top=k;break}cons
 if(!r.started||(top!==r.t&&Math.random()<.7)||Math.random()<.08){r.t=top;r.i=R(0,T[top].c.length-1)}
 const cn2=club(r.t,r.i).n;if(r.started&&(r.t!==pt||r.i!==pi))out.push(`🆚 라이벌 ${N}${josa(N,'가')} ${cn2}${josa(cn2,'로')} 이적했습니다`);if(!r.started)out.push(`🆚 라이벌 ${N}${josa(N,'가')} ${cn2}에서 프로 생활을 시작했습니다`);r.started=1;
 const gap=r.o-T[r.t].need,lv=gap>=-1?3:gap>=-7?2:1,apps=lv===3?R(28,38):lv===2?R(10,22):R(2,9),perf=cl(1+gap/20,.4,1.8),pp=P[r.pos],
-g=Math.round(apps*pp.gs*.5*perf*rf(.7,1.3)),a=Math.round(apps*(pp.as*.45+.03)*perf*rf(.7,1.3)),rt=cl(r1(6.3+gap/7+rf(-.4,.6)),5.4,9.4),aws=[];
+g=Math.round(apps*pp.gs*.5*perf*rf(.7,1.3)),a=r.pos==='GK'?(Math.random()<apps/38*.15?1:0):Math.round(apps*(pp.as*.45+.03)*perf*rf(.7,1.3)),rt=cl(r1(6.3+gap/7+rf(-.4,.6)),5.4,9.4),rd=seasonRt(gap,0),aws=[];
 r.apps+=apps;r.goals+=g;r.ast+=a;
 if(lv>=2){if(rt>=7.7&&apps>=25&&Math.random()<.45)aws.push('리그 베스트11');if(r.pos!=='GK'&&g>=22&&Math.random()<.4)aws.push('리그 득점왕');if(r.t===3&&rt>=8.3&&r.o>=85&&Math.random()<.12)aws.push('발롱도르')}
-r.aw.push(...aws);aws.forEach(x=>out.push(`🆚 라이벌 ${N}, ${x} 수상`));line={club:cn2,t:r.t,i:r.i,apps,g,a,rt,o:r.o,lv};
+r.aw.push(...aws);aws.forEach(x=>out.push(`🆚 라이벌 ${N}, ${x} 수상`));line={club:cn2,t:r.t,i:r.i,apps,g,a,rt,rd,o:r.o,lv};
 if(me){const sc=x=>x.rt*10+Math.min(x.apps,38)/38*6+x.aw*4,dd=sc(me)-sc({...line,aw:aws.length}),res=Math.abs(dd)<1.5?'무':dd>0?'승':'패';r[{승:'w',무:'d',패:'l'}[res]]++;line.res=res;
 if(me.lg===club(r.t,r.i).lg&&me.apps&&apps){line.dm=[0,1].map(()=>{const v=(me.o-r.o)/6+rf(-1.2,1.2);return v>.4?'승':v<-.4?'패':'무'});out.push(`🆚 라이벌 ${N}${josa(N,'와')} 리그 맞대결 ${line.dm.join(' · ')}`)}
 const ah=me.o>=r.o;if(r.ahead!=null&&ah!==r.ahead)out.push(ah?`🆚 OVR에서 라이벌 ${N}${josa(N,'를')} 앞질렀습니다`:`🆚 라이벌 ${N}${josa(N,'가')} OVR에서 앞서기 시작했습니다`);r.ahead=ah}}
@@ -794,8 +815,8 @@ if(old>=19&&(old>=38||(old>=33&&r.o<T[0].need-6&&Math.random()<.5))){r.ret=1;r.r
 r.h2h.push({lab:lb,age:old,me,rv:line});return out}
 const rivalTag=()=>{const r=s.riv;return r?`${r.w}승 ${r.d}무 ${r.l}패`:''};
 // ── 성장: 시즌당 능력치별 최대 +1.3, 30대부터 큰 폭 하락 ──
-function grow(m){const pm=.85+(s.pot-52)/44*.3,play=m==='pro'?[1,.85,.95,1.05][s.lvp]:m==='상무'?.9:m==='현역'?.5:1;
-s.k.forEach(k=>{const f=s.focus.includes(k),a=s.age;let g;
+function grow(m){const pm=.62+(s.pot-52)/44*.7,play=m==='pro'?[1,.85,.95,1.05][s.lvp]:m==='상무'?.9:m==='현역'?.5:1;
+s.k.forEach(k=>{const f=s.focus.includes(k),a=s.age-(s.bloom||0);let g;// bloom: 성장 곡선이 이르거나(-) 늦은(+) 선수
 if(a<=20)g=f?rf(.3,1.2):rf(.05,.95);else if(a<=26)g=f?rf(.15,1.1):rf(-.1,.8);else if(a<=29)g=f?rf(-.4,.6):rf(-.6,.45);
 else if(a<=32)g=DEC.includes(k)?rf(-1.1,-.25):rf(-.6,.2);else g=DEC.includes(k)?rf(-1.7,-.55):rf(-1,-.1);
 if(Math.random()<.08)g-=rf(.3,.8);// 컨디션 난조·잔부상 시즌
@@ -820,27 +841,23 @@ function milestones(b0,lb){const out=[];Object.keys(MSD).forEach(key=>{const a=b
 
 // ── 시즌 준비 ──
 function prep(){s.ph='prep';s.offers=null;const y=isY(),o=ovr(s),c=getC(),forced=!y&&s.mil==='none'&&s.age>=28,spL=s.spLeft??3,spSeason=s.spY===s.y,spUsed=spL<=0||spSeason,yr=s.y+1;
-const story=y?`${c.n} U-18에서 프로 계약을 목표로 뜁니다. 시즌이 끝날 때마다 코칭스태프가 성장을 평가합니다.`:s.pro===0?'꿈꾸던 프로 계약을 맺었습니다. 구단의 기대와 팬들의 관심 속에서 프로 커리어를 시작합니다.':['','출전 기회를 늘리려면 시즌 초반부터 존재감을 보여야 합니다.','로테이션 자원으로 자리 잡았습니다. 이번 시즌 목표는 주전 경쟁입니다.','팀의 주축으로 시즌을 맞이합니다. 기대치도 그만큼 높습니다.'][s.lvp];
+const story=y?`${c.n} U-18에서 프로 계약을 목표로 뜁니다.`:s.pro===0?'꿈꾸던 프로 계약을 맺었습니다. 첫 시즌을 시작합니다.':['','출전 기회를 늘리려면 시즌 초반부터 존재감을 보여야 합니다.','로테이션 자원으로 자리 잡았습니다. 목표는 주전 경쟁입니다.','팀의 주축으로 시즌을 맞이합니다.'][s.lvp];
 let ag=0,ol=0;for(let k=0;k<=8;k++){const yy=yr+k,a=s.age+k;if(a<=23&&yy%4===2)ag++;if(a<=23&&yy%4===0)ol++}
-const nt=[];if(yr%4===2){nt.push(['FIFA 월드컵',s.age>=18&&o>=66?'선발 유력':'선발 어려움'])}if(yr%4===2&&s.age<=23)nt.push(['아시안게임',o>=55?'선발 유력':'선발 어려움']);if(yr%4===0&&s.age<=23)nt.push(['올림픽',o>=58?'선발 유력':'선발 어려움']);
-let h=`<div class="eye">${y?`U-18 ${s.age-15}년차`:`프로 ${s.pro+1}년차`}</div><h2 class="pt">${lab()} 시즌 준비</h2>
-<div class="pc"><span class="rc">${esc(s.style).slice(0,3)}</span><div class="pci"><small>${cn()}</small><b>${esc(s.name)} <span class="mute">${s.age}세</span></b><em>${y?'U-18':POSL[s.lvp]}</em></div><div class="pcr"><small>${P[s.pos].n}</small><b>OVR ${f1(o)}</b></div></div>
-<div class="story">${story}</div>
-<button class="rowb" ${spUsed?'disabled':''} onclick="spStart()"><span>특별훈련</span><span class="mute">${spL<=0?'모두 사용':spSeason?`이번 시즌 완료 · 잔여 ${spL}회`:`이번 시즌 1회 · 잔여 ${spL}회`} ${[0,1,2].map(i=>`<i class="ball${i>=spL?' off':''}">⚽</i>`).join('')}</span><span>→</span></button>
-<div class="card"><div style="display:flex;gap:10px;align-items:center">${clubBadge(s.tier,s.ci)}<div style="min-width:0;flex:1"><b>${cn()}</b><div class="mute">${LG[c.lg].n} · ${T[s.tier].n}</div></div><span class="mute">🏆 ${s.aw.filter(isTeam).length}회</span></div><p class="mute" style="margin:8px 0 10px">${c.d}</p>
-<div class="kv"><div>지난 시즌<b>${s.rank||'-'}</b></div><div>대항전<b>${s.comp==='없음'?'없음':`<span class="tag ${compTag(s.comp)}">${s.comp}</span>`}</b></div></div></div>
-${(R2=>R2?`<div class="card"><div class="top"><h3>라이벌</h3><span class="mute">${R2.ret?`${R2.retAge}세 은퇴`:`${P[R2.pos].n}`}</span></div><div style="display:flex;gap:10px;align-items:center">${R2.started?clubBadge(R2.t,R2.i,1):''}<div style="flex:1;min-width:0"><b>${esc(R2.name)}</b><div class="mute">${R2.started?club(R2.t,R2.i).n:esc(R2.school)+' 출신 · 유스'}</div></div><div class="ho"><small>OVR</small><b>${f1(R2.o)}</b></div></div>
-<div class="rvbar"><i style="width:${o/(o+R2.o)*100}%"></i></div><div class="top mute" style="font-size:12px"><span>나 ${f1(o)}</span><span>통산 전적 ${rivalTag()}</span></div></div>`:'')(s.riv)}
-<div class="card"><div class="top"><h3>국가대표 · 병역</h3><span class="mute">${s.age}세 · ${s.mil==='done'?'병역 완료':'미필'}</span></div>
-${nt.length?nt.map(([n,v])=>`<div class="trow"><span><b>${yr}</b> ${n}</span><b class="${v==='선발 유력'?'up':'mute'}">${v}</b></div>`).join(''):'<p class="empty">이번 시즌 종료 후 열리는 메이저 대회가 없습니다.</p>'}
-${s.mil==='none'?`<p class="mute" style="margin:8px 0 0">${forced?'<b class="dn">만 28세가 되어 더 미룰 수 없습니다. 입대 방식을 선택하세요.</b>':`병역 면제 기회: 아시안게임 ${ag}회 · 올림픽 ${ol}회 남음 (23세까지 우승 시 면제)`}</p>`:''}
-${!y&&s.mil==='none'&&s.age>=20?`<div class="btns two mt"><button class="alt" onclick="milGo('상무')">김천 상무 지원<small>OVR 58 · 27세 이하</small></button><button class="alt" onclick="milGo('현역')">현역 입대<small>2년 · 능력치 소폭 하락</small></button></div>`:''}</div>`;
-if(!y)h+=`<div class="card"><div class="kvb" style="margin-top:0"><div><small>연봉</small><b>${s.ct.sal}억</b></div><div><small>계약 잔여</small><b>${s.ct.left}년</b></div><div><small>누적 수입</small><b>${f1(s.earn)}억</b></div></div>
-<div class="btns" style="grid-template-columns:1fr 2fr"><button class="alt" ${s.ct.left<=1&&s.reY!==s.y?'':'disabled'} onclick="reNew()">재계약${s.ct.left>1?'<small>잔여 1년부터</small>':''}</button><button ${forced?'disabled':''} onclick="run()">시즌 진행 →<small>계약 ${s.ct.yrs-s.ct.left+1}/${s.ct.yrs}년차</small></button></div></div>
-<button class="alt w" ${s.trY===s.y?'disabled':''} onclick="market('tr')">이적 요청</button>`;
-else h+=`<button class="w" onclick="run()">${lab()} 시즌 진행 →</button>`;
-h+=`<div class="btns ${y?'':'two'} mt">${y?'':'<button class="rd" onclick="retireAsk()">현역 은퇴</button>'}<button class="alt" onclick="newLife()">새로운 인생 시작</button></div>`;
+const nt=[];if(yr%4===2)nt.push(['월드컵',s.age>=18&&o>=66]);if(yr%4===2&&s.age<=23)nt.push(['아시안게임',o>=55]);if(yr%4===0&&s.age<=23)nt.push(['올림픽',o>=58]);
+const R2=s.riv,canMil=!y&&s.mil==='none'&&s.age>=20;
+let h=`<div class="hd2"><div><div class="eye">${y?`U-18 ${s.age-15}년차`:`프로 ${s.pro+1}년차`} · ${s.age}세</div><h2 class="pt" style="margin:0">${lab()} 시즌 준비</h2></div><span class="chip on">${y?'U-18':POSL[s.lvp]}</span></div>
+<div class="card cpt"><div class="crow">${clubBadge(s.tier,s.ci)}<div class="cgrow"><b>${cn()}</b><small class="mute">${LG[c.lg].n} · ${T[s.tier].n} · 🏆 ${s.aw.filter(isTeam).length}회</small></div><div class="ho"><small>OVR</small><b>${f1(o)}</b></div></div>
+<div class="kv4"><div><small>지난 시즌</small><b>${s.rank?s.rank.replace(' / ','/'):'-'}</b></div><div><small>대항전</small><b>${s.comp==='없음'?'없음':s.comp.replace('리그','').replace('AFC 챔피언스','ACL')}</b></div>${y?`<div><small>역할</small><b>${esc(s.style)}</b></div><div><small>포지션</small><b>${P[s.pos].n}</b></div>`:`<div><small>연봉</small><b>${s.ct.sal}억</b></div><div><small>계약</small><b>${s.ct.yrs-s.ct.left+1}/${s.ct.yrs}년차</b></div>`}</div>
+<p class="mute" style="margin:8px 0 0;font-size:13px">${story}</p></div>
+<div class="g2">${R2?`<div class="card cpt mini"><div class="top"><small class="eye" style="margin:0;color:var(--red)">RIVAL</small><small class="mute">${rivalTag()}</small></div><b class="ell">${esc(R2.name)}</b><small class="mute ell">${R2.ret?`${R2.retAge}세 은퇴`:R2.started?club(R2.t,R2.i).n:'유스'}</small><div class="rvbar"><i style="width:${o/(o+R2.o)*100}%"></i></div><div class="top" style="font-size:12px"><span class="up">나 ${f1(o)}</span><span class="dn">${f1(R2.o)}</span></div></div>`:''}
+<div class="card cpt mini"><div class="top"><small class="eye" style="margin:0;color:var(--cy)">NATIONAL</small><small class="mute">${s.mil==='done'?'병역 완료':'미필'}</small></div>${nt.length?nt.map(([n,ok])=>`<div class="top" style="font-size:13px"><span>${yr} ${n}</span><b class="${ok?'up':'mute'}">${ok?'유력':'어려움'}</b></div>`).join(''):'<small class="mute">이번 시즌 뒤 메이저 대회 없음</small>'}${s.mil==='none'?`<small class="mute" style="display:block;margin-top:4px">${forced?'<b class="dn">28세 · 입대해야 합니다</b>':`면제 기회 AG ${ag} · 올림픽 ${ol}`}</small>`:''}</div></div>
+<div class="acts"><button class="alt" ${spUsed?'disabled':''} onclick="spStart()">특별훈련<small>${spL<=0?'모두 사용':spSeason?'이번 시즌 완료':`잔여 ${spL}회`}</small></button>
+${y?'':`<button class="alt" ${s.trY===s.y?'disabled':''} onclick="market('tr')">이적 요청<small>${s.trY===s.y?'이번 시즌 완료':'구단 제안 보기'}</small></button><button class="alt" ${s.ct.left<=1&&s.reY!==s.y?'':'disabled'} onclick="reNew()">재계약<small>${s.ct.left>1?'잔여 1년부터':'협상하기'}</small></button>`}
+${canMil?`<button class="${forced?'rdf':'alt'}" onclick="milModal()">입대<small>${forced?'지금 필요':'상무 · 현역'}</small></button>`:''}</div>
+<div class="actbar"><button class="w" ${forced?'disabled':''} onclick="run()">${lab()} 시즌 진행 →</button></div>
+<div class="minor">${y?'':'<button class="lnk dn" onclick="retireAsk()">현역 은퇴</button>'}<button class="lnk" onclick="newLife()">새로운 인생 시작</button></div>`;
 render(h);if(s.sc)modal(`<div class="eye">PLAYER STYLE CHANGE</div><h2>스타일 변화</h2><p class="mute">능력치 흐름에 맞춰 플레이 스타일이 바뀌었습니다.</p><div class="swap"><div><small>이전</small><b>${s.sc[0]}</b></div><i>→</i><div class="on"><small>새 역할</small><b>${s.sc[1]}</b></div></div><button class="w" onclick="s.sc=null;closeModal();prep()">확인 →</button>`);else if(s.offer)offerModal();else if(s.ev)evModal()}
+function milModal(){modal(`<div class="eye">MILITARY SERVICE</div><h2>입대</h2><p class="mute">복무 2년은 약력으로만 기록되고 계약 기간은 멈춥니다. 23세까지 아시안게임·올림픽에서 우승하면 면제됩니다.</p><div class="btns two mt"><button class="alt" onclick="closeModal();milGo('상무')">김천 상무 지원<small>OVR 58 · 27세 이하</small></button><button class="alt" onclick="closeModal();milGo('현역')">현역 입대<small>능력치 소폭 하락</small></button></div><button class="alt w mt" onclick="closeModal()">나중에</button>`)}
 function milGo(t){const o=ovr(s);if(t==='상무'&&(o<58||s.age>27)){toast('상무 지원 탈락',s.age>27?'27세 이하만 지원할 수 있습니다':'OVR 58 이상이 필요합니다','red');log('김천 상무 지원에 탈락했습니다.','병역','r');return prep()}
 s.srv={t,n:0};s.offer=null;s.ev=null;log(`${t==='상무'?'김천 상무에 합격했습니다':'현역으로 입대했습니다'}. (2년)`,'병역','o');svcStep()}
 function reNew(){const o=ovr(s);s.reY=s.y;const ok=o>=T[s.tier].need-6&&Math.random()<.85;save();
@@ -886,9 +903,10 @@ const pool=[top,top];if(top<3&&o>=T[top+1].need-6&&Math.random()<.35)pool.unshif
 pool.forEach(t=>{if(t===1&&!(late||early))t=top>=2?2:0;let i,n=0;do i=R(0,T[t].c.length-1);while(seen.has(t+'-'+i)&&++n<12);add(t,i,0)});return out}
 function market(mode){s.ph='market';if(s.mk!==mode||!s.offers)s.offers=genOffers(mode);s.mk=mode;
 const H={fa:['FA 시장','계약이 만료되어 자유계약(FA) 선수가 되었습니다. 원하는 팀의 제안을 고르세요.','or','o'],tr:['이적 시장','이적을 요청하자 여러 구단이 관심을 보였습니다.','or','o'],youth:['프로 데뷔 제안','유스 과정을 마쳤습니다. 첫 프로 계약을 맺을 구단을 고르세요.','g','g'],univ:['대학 졸업반 · 프로 구단 제안','대학에서의 활약을 지켜본 구단들이 제안을 보냈습니다.','vi','v']}[mode];
-render(`<div class="card res"><span class="tag ${H[3]}">${lab()} · ${s.age}세 · OVR ${f1(ovr(s))}</span><div class="big" style="color:var(--${H[2]})">${H[0]}</div><p class="mute" style="margin:0">${H[1]}</p></div>
-${s.offers.map((of,j)=>{const c=club(of.t,of.i);return `<div class="card"><div class="top"><div style="min-width:0"><b style="font-size:17px">${c.n}</b>${of.own?' <span class="tag c">현 소속팀</span>':''}<div class="mute">${LG[c.lg].n}</div></div>${tierPill(of.t)}</div><p class="mute" style="margin:6px 0 10px">${c.d}</p>
-<div class="top" style="margin-bottom:8px"><b style="font-size:18px">${of.yrs}년 총액 ${f1(of.bonus+of.sal*of.yrs)}억</b><span class="mute">${of.role}</span></div><div class="kv"><div>연봉<b>${of.sal}억</b></div><div>계약금<b>${of.bonus}억</b></div></div>${of.cm?`<p class="cmt"><span>구단 코멘트</span>“${of.cm}”</p>`:''}${of.trd?`<p class="mute" style="margin:4px 0 0;font-size:12px">최근 3시즌 성적 ${of.trd.map(x=>x+'위').join(' → ')}</p>`:''}<button class="w mt" onclick="pickOffer(${j})">이 제안 선택</button></div>`}).join('')}
+render(`<div class="hd2"><div><div class="eye">${lab()} · ${s.age}세 · OVR ${f1(ovr(s))}</div><h2 class="pt" style="margin:0;color:var(--${H[2]})">${H[0]}</h2></div></div><p class="mute" style="margin:0 0 8px;font-size:13px">${H[1]}</p>
+${s.offers.map((of,j)=>{const c=club(of.t,of.i);return `<div class="card cpt ofc"><div class="crow">${clubBadge(of.t,of.i,1)}<div class="cgrow"><b>${c.n}${of.own?' <span class="tag c">현 소속팀</span>':''}</b><small class="mute">${LG[c.lg].n} · ${of.role}</small></div>${tierPill(of.t)}</div>
+<div class="ofm"><b>${of.yrs}년 · 총 ${f1(of.bonus+of.sal*of.yrs)}억</b><small class="mute">연봉 ${of.sal}억 · 계약금 ${of.bonus}억</small></div>${of.cm?`<p class="ofq">“${of.cm}”</p>`:''}
+<div class="crow"><small class="mute cgrow">${of.trd?'최근 3시즌 '+of.trd.map(x=>x+'위').join(' → '):esc(c.d)}</small><button class="sm" onclick="pickOffer(${j})">선택</button></div></div>`}).join('')}
 <div class="btns">${mode==='tr'?'<button class="alt" onclick="stayTr()">현 소속팀 잔류</button>':''}${mode==='univ'&&s.edu&&s.edu.y<7?'<button class="alt" onclick="s.offers=null;s.edu.ext=1;eduStep()">대학에서 2년 더 뛰기</button>':''}${mode==='fa'?'<button class="rd" onclick="retireAsk()">현역 은퇴</button>':''}</div>`)}
 function stayTr(){s.offers=null;s.trY=s.y;log('이적 요청을 철회하고 잔류합니다.','이적','o');prep()}
 function debut(mode){s.ph='debut';if(s.mk!==mode||!s.offers)s.offers=genOffers(mode);s.mk=mode;const st=s.dst||0,of=s.offers,bi=of.reduce((b,x,i)=>x.t>of[b].t||(x.t===of[b].t&&x.sal>of[b].sal)?i:b,0),top=of[bi].t,yy=s.y;
@@ -979,7 +997,7 @@ const need=yo?youthNeed(old):T[tier].need,gap=o-need-s.pen;s.pen=0;
 const rook=!yo&&s.pro===0,lvp=yo?0:rook?1:gap>=-1?3:gap>=-7?2:1,big=yo||lvp===3||(rook&&gap>=-1);
 let apps=yo?R(18,26):lvp===3?R(28,38):lvp===2?R(10,22):rook&&gap>=-1?R(15,30):R(1,8);
 if(apps>0&&Math.random()<.1){const m=R(2,7);apps=Math.max(1,Math.round(apps*(1-m/11)));log(`${m}개월 부상으로 결장했습니다.`,'부상','r');notes.push(`🩹 부상으로 ${m}개월 결장했습니다.`)}
-const SL=statLine(apps,gap,lvp,big),{g,a,rt,cs}=SL;
+const SL=statLine(apps,gap,lvp,big),{g,a,rt,rd,cs}=SL;
 const sz=yo?12:L.sz,contrib=yo?0:lvp===3?cl(gap/6,-2,1.5):lvp===2?cl(gap/12,-1,.5):0;
 const rank=yo?cl(Math.round(6-gap/3+R(-3,3)),1,12):cl(Math.round(c.ex*rf(.8,1.8)+R(0,3)-contrib),1,sz),cur=s.comp,won=[];
 if(!yo){s.apps+=apps;s.goals+=g;s.ast+=a;s.fame+=Math.max(0,Math.round(gap/3+g/4));s.seasons++;s.earn+=s.ct.sal}const pay=yo?null:{sal:s.ct.sal,allow:r1(apps*s.ct.sal*.012)};
@@ -994,8 +1012,8 @@ if(star){aw(rt>=7.7&&apps>=25&&Math.random()<.5,'리그 베스트11');aw(rt>=8.2
 aw(!gk&&L.eu&&g*(L.t5?2:1.5)>=56&&Math.random()<.6,'유러피언 골든슈');aw(tier===3&&rt>=8.3&&o>=85&&Math.random()<.15+won.length*.06,'발롱도르');aw(gk&&rt>=7.9&&tier>=2&&Math.random()<.4,'야신상');
 aw(o>=83&&rt>=8&&tier>=2&&Math.random()<.35,'FIFPro 월드 베스트11');aw(!gk&&g>=12&&Math.random()<.02,'푸스카스상');aw(old<=21&&tier>=2&&o>=66&&rt>=7.4&&!s.aw.includes('골든보이')&&Math.random()<.4,'골든보이')}
 aw(s.pro<=2&&old<=23&&rt>=7.1&&apps>=20&&Math.random()<.45,'영플레이어상')}
-notes.push(...natTeam(o,old,true,true));notes.push(...rivalTick(old,lb,yo?null:{club:cn(),apps,g,a,rt,o,aw:notes.filter(n=>n.startsWith('⭐')).length,lg:c.lg}));
-if(apps)log(`${cn()} ${apps}경기 ${g}골 ${a}도움 · 평점 ${f1(rt)} · ${rank}위`,lb,'b');
+notes.push(...natTeam(o,old,true,true));notes.push(...rivalTick(old,lb,yo?null:{club:cn(),apps,g,a,rt,rd,o,aw:notes.filter(n=>n.startsWith('⭐')).length,lg:c.lg}));
+if(apps)log(`${cn()} ${apps}경기 ${g}골 ${a}도움 · 평점 ${f1(rd)} · ${rank}위`,lb,'b');
 if(pay){pay.bonus=r1(won.length*s.ct.sal*.1);pay.total=r1(pay.sal+pay.allow+pay.bonus);s.earn+=pay.allow+pay.bonus}
 const prevL=s.lvp,GMS={12:38,15:34,16:34,18:34,20:38,24:46}[sz]||34,ng=yo?22:GMS,ppg=2.3-(rank-1)/Math.max(1,sz-1)*1.6,dr0=Math.round(ng*rf(.16,.3)),w0=cl(Math.round((ppg*ng-dr0)/3),0,ng-dr0),
  team={rank,sz,w:w0,d:dr0,l:ng-w0-dr0,pts:w0*3+dr0,cup:yo?null:[L.cup,won.includes(L.cup+' 우승')?'우승':pk(['3라운드','16강','8강','4강'])],comp:!yo&&cur!=='없음'?[cur,won.includes(cur+' 우승')?'우승':pk(['리그 페이즈 탈락','16강','8강','4강'])]:null};s.lvp=lvp;s.rank=`${rank}위 / ${sz}`;s.comp=yo?'없음':compFor(c.lg,rank);
@@ -1014,9 +1032,9 @@ else if(s.age>=31&&!s.spdE&&s.k.some(k=>DEC.includes(k))&&ro<.55){const k=s.k.fi
 else if(ro<.12){const alt=pk(p.s.filter(x=>x[0]!==s.style&&x[1]!=='*')),aks=roleKeys(alt);s.ev={id:'coach',t:'감독의 성장 루트 제안',b:`감독이 ${alt[0]} 역할로의 전환을 제안합니다. 받아들이면 ${aks.join('·')}${josa(aks.join('·'),'가')} 0.3씩 오릅니다.`,a:'제안을 받아들인다',c:'지금 역할을 유지한다',n:alt[0],ks:aks}}
 else if(ro<.16&&!(s.sackY>s.y-5))s.sackY=s.y,s.ev={id:'sack',t:'감독 경질, 팀 내 불화',b:'감독이 경질되고 라커룸 분위기가 어수선합니다. 팀에 남으면 다음 시즌 입지가 흔들릴 수 있습니다.',a:'팀에 남는다',c:'이적을 택한다'}}
 const fan=!apps?'경기 기록이 없어 팬들의 관심도 줄어들었습니다.':rt>=7.8?pk(['팬들이 당신의 이름을 연호합니다. "올해의 선수 후보!"','커뮤니티가 활약 영상으로 도배됐습니다.']):rt>=6.8?pk(['꾸준한 활약에 팬들은 대체로 만족합니다.','믿고 쓰는 선수라는 평가가 늘었습니다.']):pk(['팬들은 아쉬움을 감추지 못했습니다. 반등이 필요합니다.','팬 커뮤니티에서 비판 여론이 커졌습니다.']);
-s.hs.push({lab:lb,age:old,club:clubNm,apps,g,a,rt:apps?f1(rt):'',rank:`${rank}/${sz}`,o:o1,t:tier,i:s.ci,lv:yo?'U-18':POSL[lvp],hl:notes.filter(n=>/^(🏆|⭐)/.test(n)).map(n=>n.slice(2).trim()),st:notes.filter(n=>/^(🔄|📣|🩹|🆚)/.test(n)).map(n=>n.slice(2).trim())});if(!s.peak||o1>s.peak.o)s.peak={o:o1,st:{...s.st},lab:lb,age:old};if(!yo)s.cy=(s.cy||0)+1;
-s.rv={lab:lb,club:clubNm,rank:s.rank,o0:o,o1,notes,fan,young:yo,apps,g,a,rt,gk,cs,t0:b0,ms,lvp,SL,head:apps?(gap>=4?'리그를 지배한 시즌':gap>=0?'팀의 핵심 전력이었던 시즌':gap>=-6?'성장 가능성을 보여 준 시즌':'아직 갈 길이 먼 시즌'):'경기에 나서지 못한 시즌',
-rev:apps?`${apps}경기 ${g}골 ${a}도움 · 평균 평점 ${f1(rt)} · 팀 ${s.rank}`:'이번 시즌은 경기에 나서지 못했습니다.',
+s.hs.push({lab:lb,age:old,club:clubNm,apps,g,a,rt:apps?f1(rd):'',rank:`${rank}/${sz}`,o:o1,t:tier,i:s.ci,lv:yo?'U-18':POSL[lvp],hl:notes.filter(n=>/^(🏆|⭐)/.test(n)).map(n=>n.slice(2).trim()),st:notes.filter(n=>/^(🔄|📣|🩹|🆚)/.test(n)).map(n=>n.slice(2).trim())});if(!s.peak||o1>s.peak.o)s.peak={o:o1,st:{...s.st},lab:lb,age:old};if(!yo)s.cy=(s.cy||0)+1;
+s.rv={lab:lb,club:clubNm,rank:s.rank,o0:o,o1,notes,fan,young:yo,apps,g,a,rt,rd,gk,cs,t0:b0,ms,lvp,SL,head:apps?(gap>=4?'리그를 지배한 시즌':gap>=0?'팀의 핵심 전력이었던 시즌':gap>=-6?'성장 가능성을 보여 준 시즌':'아직 갈 길이 먼 시즌'):'경기에 나서지 못한 시즌',
+rev:apps?`${apps}경기 ${g}골 ${a}도움 · 평균 평점 ${f1(rd)} · 팀 ${s.rank}`:'이번 시즌은 경기에 나서지 못했습니다.',
 chg:s.k.map(k=>[k,before[k],s.st[k]]),nextC:done,force,retRec,team,lvp0:rook?1:prevL,nat:s.natRes||[],pay,
 quotes:[fan,yo?pk(['코치진은 프로 계약까지 남은 과제를 차분히 정리해 줬다.','유스 감독: "한 시즌 사이에 몸이 달라졌다."']):lvp>(rook?1:prevL)?pk(['감독: "훈련장에서 보여 준 걸 경기장에서 증명했다."','감독: "이제 팀이 계산에 넣는 선수다."']):lvp<(rook?1:prevL)?pk(['감독: "다시 경쟁해야 한다. 자리는 아무도 보장해 주지 않는다."','코치진은 출전 시간이 줄어든 이유를 수비 가담에서 찾았다.']):pk(['감독: "꾸준함은 가장 과소평가된 재능이다."','코치진은 다음 시즌 역할을 조금 더 넓히겠다고 밝혔다.']),
 rt>=7.6?pk(['현지 매체가 시즌 베스트 경기에 이름을 올렸다.','중계진이 "이 선수 한 명이 경기의 흐름을 바꿨다"고 평가했다.']):rt>=6.6?pk(['현지 매체 평점은 대체로 무난했다.','기록보다 경기 영향력이 더 좋았다는 분석도 나왔다.']):pk(['현지 매체는 "아직 리그 속도에 적응 중"이라고 평가했다.','경기 기록이 적어 평가가 엇갈렸다.'])]};s.ph='review';save()}
@@ -1032,7 +1050,7 @@ iv=setInterval(()=>{if(pz)return;
 if(!r.young&&r.lvp>r.lvp0&&!r.cu&&p>=50){r.cu=1;pz=true;save();modal(`<div class="eye">엔트리 변동 · ${r.lvp===3?'FIRST TEAM CALL-UP':'ROTATION'}</div><h2>${r.lvp===3?'1군 주전 도약':'로테이션 진입'}</h2><p class="mute">코칭스태프가 최근 기량을 인정해 ${POSL[r.lvp]} 자리를 맡깁니다.</p><div class="swap"><div><small>이전</small><b>${POSL[r.lvp0]}</b></div><i>→</i><div class="on"><small>새 역할</small><b>${POSL[r.lvp]}</b></div></div><button class="w" onclick="_cu()">확인 ✓</button>`);return}
 p+=2;const f=p/100,ap=Math.round(r.apps*f),gg=Math.round(r.g*f),aa=Math.round(r.a*f);
 $('pb').style.width=p+'%';document.querySelectorAll('#ch span').forEach((e,i)=>e.className=i<f*4?'on':'');
-$('la').textContent=ap;$('lg').textContent=r.gk?Math.round(r.cs*f):gg;$('ls').textContent=aa;if(ap)$('lr').textContent=f1(cl(r.rt+(Math.sin(p)*.3)*(1-f),5,9.9));
+$('la').textContent=ap;$('lg').textContent=r.gk?Math.round(r.cs*f):gg;$('ls').textContent=aa;if(ap)$('lr').textContent=f1(cl((r.rd??dispRt(r.rt))+(Math.sin(p)*.2)*(1-f),5,8.5));
 if(!r.young){$('ta').textContent=r.t0.apps+ap;$('tg').textContent=r.t0.goals+gg;$('tA').textContent=r.t0.ast+aa}
 while(animMs.length&&animMs[0].at<=f){const m=animMs.shift();toast(m.t,m.sub,m.c)}
 if(p>=100){clearInterval(iv);later(()=>natFlow(0),500)}},80)}
@@ -1051,31 +1069,29 @@ render(`<div class="full"><div class="eye">${yr} ${x.n==='아시안게임'?'SEPT
 <button class="w mt" id="nb" onclick="natFlow(${i+1})" style="visibility:hidden">${i+1<list.length?'다음 대회 →':'시즌 결과 보기 →'}</button></div>`);
 let k=0;const step=()=>{document.getElementById('ns'+k).classList.add('on');if(k<st){k++;later(step,550)}else later(()=>{document.getElementById('nr').innerHTML=`<b style="font-size:24px;color:var(--${win?'yel':'ink'})">${v}</b><br><span class="mute">개인 활약 · ${x.pl}</span>`;if(win)toast(`${x.n} ${v}!`,'대한민국 국가대표','yel');document.getElementById('nb').style.visibility='visible'},600)};later(step,700)}
 function natAns(i,y){const x=s.natP[i],r=s.rv;x.st=1;if(!y){x.v='불참';x.pl='-';r.nat.push([x.n,'불참']);log(`${x.yr} ${x.n} 대표팀 소집에 응하지 않았습니다.`,'대표팀','c');return natFlow(i+1)}
-x.v=natResolve(x.n,x.o,x.yr);const gp=natStage(x.v)+R(2,3),gk=s.pos==='GK',gl=gk?0:Math.round(gp*P[s.pos].gs*rf(.2,.6));x.pl=`${gp}경기${gk?'':` ${gl}골`} · 평점 ${f1(cl(6.4+(x.o-70)/12+rf(-.3,.5),5.8,9))}`;
+x.v=natResolve(x.n,x.o,x.yr);const gp=natStage(x.v)+R(2,3),gk=s.pos==='GK',gl=gk?0:Math.round(gp*P[s.pos].gs*rf(.2,.6));x.pl=`${gp}경기${gk?'':` ${gl}골`} · 평점 ${f1(cl(6.3+(x.o-70)/18+rf(-.3,.35),5.8,8.3))}`;
 r.nat.push([x.n,x.v]);r.notes.push(`🌍 ${x.yr} ${x.n} ${x.v}`);if(x.v==='금메달'&&!r.notes.includes('🌍 병역 면제 확정!'))r.notes.push('🌍 병역 면제 확정!');log(`${x.yr} ${x.n} ${x.v} (${x.pl})`,'대표팀','c');save();natFlow(i)}
-function review(){const r=s.rv,L=r.SL,tm=r.team,cb=s.ci!=null?clubBadge(s.tier,s.ci,1):'';render(`<div class="${r.shown?'':'stag'}"><div class="eye">${r.lab} SEASON</div><h2 class="pt">${r.club} 시즌 결과</h2>
-<p class="mute" style="margin:0;display:flex;gap:6px;align-items:center;flex-wrap:wrap">${!r.young&&r.lvp0!==r.lvp?`<span class="chip">${POSL[r.lvp0]}</span>→<span class="chip on">${POSL[r.lvp]}</span>`:`<span class="chip">${r.young?'U-18':POSL[r.lvp]}</span>`} · ${s.style} · ${r.apps}경기</p>
-${!r.young&&r.lvp0!==r.lvp?`<p class="mute" style="margin:6px 0 0">${r.lvp>r.lvp0?'주전 경쟁에서 앞서며 출전 시간을 늘렸습니다.':'경쟁에서 밀려 출전 시간이 줄었습니다. 다음 시즌 반등이 필요합니다.'}</p>`:''}
-${(()=>{const w=r.notes.filter(n=>/^(🏆|⭐)/.test(n));return w.length?`<div class="card awc"><div class="awi">🏆</div><div>${w.map(n=>`<b>${n.slice(2).trim()}</b>`).join('')}</div></div>`:''})()}
+function review(){const r=s.rv,L=r.SL,tm=r.team,cb=s.ci!=null?clubBadge(s.tier,s.ci,1):'';
+const aw=r.notes.filter(n=>/^(🏆|⭐)/.test(n)),news=[...r.notes.filter(n=>!/^(🏆|⭐)/.test(n)),...r.ms.filter(m=>m.t!=='팀 내 입지 변화').map(m=>'🎉 '+m.t)];
+const R2=s.riv,h=R2&&R2.h2h[R2.h2h.length-1],rv=h&&h.lab===r.lab&&h.rv&&h.me?h:null;
+render(`<div class="${r.shown?'':'stag'}"><div class="hd2"><div><div class="eye">${r.lab} SEASON · ${r.apps}경기</div><h2 class="pt" style="margin:0">${r.club} 시즌 결과</h2></div>${!r.young&&r.lvp0!==r.lvp?`<span class="chip on">${POSL[r.lvp0]} → ${POSL[r.lvp]}</span>`:`<span class="chip">${r.young?'U-18':POSL[r.lvp]}</span>`}</div>
+${aw.length?`<div class="awl">${aw.map(n=>`<span>${n}</span>`).join('')}</div>`:''}
 ${callout(r.head,r.rev)}${tiles(L,r.rank)}${details(L)}${ovrBox(r.o0,r.o1,r.shown)}${chgTiles(r.chg,r.shown)}
-${tm?`<div class="card" style="margin-top:10px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">${cb}<b style="flex:1">${r.club}</b><span class="mute">🏆 통산 ${s.aw.filter(isTeam).length}회</span></div>
-<div class="kvb" style="margin:0 0 8px"><div><small>리그</small><b>${tm.rank}위 / ${tm.sz}</b></div><div><small>승점</small><b>${tm.pts}</b></div></div><p class="mute" style="margin:0">${tm.w}승 ${tm.d}무 ${tm.l}패</p>
-${tm.cup?`<div class="trow"><span>${tm.cup[0]}</span><b>${tm.cup[1]}</b></div>`:''}${tm.comp?`<div class="trow"><span>${tm.comp[0]}</span><b>${tm.comp[1]}</b></div>`:''}</div>`:''}
-${(()=>{const R2=s.riv,h=R2&&R2.h2h[R2.h2h.length-1];if(!h||h.lab!==r.lab||!h.rv||!h.me)return'';const m=h.me,v=h.rv,rows=[['OVR',m.o,v.o],['경기',m.apps,v.apps],['골',m.g,v.g],['도움',m.a,v.a],['평점',m.rt,v.rt]];
-return `<div class="card"><div class="top"><h3>라이벌 비교 · ${esc(R2.name)}</h3><span class="chip ${v.res==='승'?'on':''}">시즌 판정 ${v.res}</span></div><div class="rvg"><b>나</b><span></span><b>${esc(R2.name)}</b><small>${esc(m.club)}</small><span></span><small>${esc(v.club)}</small>
-${rows.map(([k,a,b])=>`<b class="${a>b?'up':''}">${k==='OVR'||k==='평점'?f1(a):a}</b><span>${k}</span><b class="${b>a?'dn':''}">${k==='OVR'||k==='평점'?f1(b):b}</b>`).join('')}</div>${v.dm?`<p class="mute" style="margin:8px 0 0">리그 맞대결 ${v.dm.join(' · ')}</p>`:''}<p class="mute" style="margin:4px 0 0">통산 전적 ${rivalTag()}</p></div>`})()}
-${r.nat.length?`<div class="card"><h3>국가대표</h3>${r.nat.map(([n,v])=>`<div class="trow"><span>${n}</span><b class="${v==='미선발'?'dn':''}">${v}</b></div>`).join('')}</div>`:''}
-${r.notes.some(n=>!/^(🏆|⭐)/.test(n))||r.ms.length?`<div class="card pop"><h3>시즌 소식</h3>${r.notes.filter(n=>!/^(🏆|⭐)/.test(n)).map(n=>`<p style="margin:0 0 6px;font-size:14px">${n}</p>`).join('')}${r.ms.filter(m=>m.t!=='팀 내 입지 변화').map(m=>`<p style="margin:0 0 6px;font-size:14px;color:var(--yel)">🎉 ${m.t}</p>`).join('')}</div>`:''}
-${(r.quotes||[r.fan]).map((q,i)=>quote(q,['♥','!','✎'][i])).join('')}
-${r.pay?`<div class="card"><div class="kvb" style="margin:0 0 10px"><div><small>계약 연봉</small><b>${r.pay.sal}억</b></div><div><small>출전 수당</small><b>${r.pay.allow}억</b></div><div><small>우승 보너스</small><b>${r.pay.bonus}억</b></div></div><div class="top"><span class="mute">시즌 총보수</span><b style="font-size:20px">${r.pay.total}억</b></div></div>`:''}</div>${r.force?'<button class="rdf w" onclick="retire()">은퇴식으로 →</button><p class="mute" style="margin:8px 0 0">더 이상 선수 생활을 이어가기 어렵습니다.</p>':'<button class="w" onclick="afterReview()">다음 →</button>'}
-<div class="btns ${r.young||r.force?'':'two'} mt">${r.young||r.force?'':'<button class="rd" onclick="retireAsk()">현역 은퇴</button>'}<button class="alt" onclick="newLife()">새로운 인생 시작</button></div>`);if(!r.shown)revealAnim(()=>{r.shown=1;save()})}
+<div class="g2">${tm?`<div class="card cpt mini"><div class="crow">${cb}<b class="ell" style="flex:1">${tm.rank}위 / ${tm.sz}</b></div><small class="mute">${tm.w}승 ${tm.d}무 ${tm.l}패 · 승점 ${tm.pts}</small>${tm.cup?`<div class="top" style="font-size:12.5px"><span class="ell">${tm.cup[0]}</span><b>${tm.cup[1]}</b></div>`:''}${tm.comp?`<div class="top" style="font-size:12.5px"><span class="ell">${tm.comp[0].replace('리그','')}</span><b>${tm.comp[1]}</b></div>`:''}</div>`:''}
+${rv?`<div class="card cpt mini"><div class="top"><small class="eye" style="margin:0;color:var(--red)">RIVAL</small><span class="chip ${rv.rv.res==='승'?'on':''}" style="padding:1px 7px">${rv.rv.res}</span></div><b class="ell">${esc(R2.name)}</b><div class="top" style="font-size:12.5px"><span class="up">${GR[s.pos]==='G'?'평점 '+f1(rv.me.rd??dispRt(rv.me.rt)):rv.me.g+'골 '+rv.me.a+'도움'}</span><span class="dn">${GR[R2.pos]==='G'?'평점 '+f1(rv.rv.rd??dispRt(rv.rv.rt)):rv.rv.g+'골 '+rv.rv.a+'도움'}</span></div><small class="mute">${rv.rv.dm?'맞대결 '+rv.rv.dm.join('·')+' · ':''}통산 ${rivalTag()}</small></div>`:''}</div>
+${r.nat.length?`<div class="natl">${r.nat.map(([n,v])=>`<span class="${v==='미선발'||v==='불참'?'mute':''}"><small>${n}</small><b>${v}</b></span>`).join('')}</div>`:''}
+${news.length?`<div class="card cpt news2"><h3>시즌 소식</h3>${news.slice(0,4).map(n=>`<p>${n}</p>`).join('')}${news.length>4?`<details><summary class="mute">${news.length-4}개 더 보기</summary>${news.slice(4).map(n=>`<p>${n}</p>`).join('')}</details>`:''}</div>`:''}
+<div class="card cpt qts">${(r.quotes||[r.fan]).map((q,i)=>`<p><i class="qi">${['♥','!','✎'][i]}</i>${q}</p>`).join('')}</div>
+${r.pay?`<div class="payl"><span class="mute">시즌 총보수</span><b>${r.pay.total}억</b><small class="mute">연봉 ${r.pay.sal} · 수당 ${r.pay.allow} · 보너스 ${r.pay.bonus}</small></div>`:''}</div>
+<div class="actbar">${r.force?'<button class="rdf w" onclick="retire()">은퇴식으로 →<small>더 이상 선수 생활을 이어가기 어렵습니다</small></button>':'<button class="w" onclick="afterReview()">다음 →</button>'}</div>
+<div class="minor">${r.young||r.force?'':'<button class="lnk dn" onclick="retireAsk()">현역 은퇴</button>'}<button class="lnk" onclick="newLife()">새로운 인생 시작</button></div>`);if(!r.shown)revealAnim(()=>{r.shown=1;save()})}
 // ── 특별훈련 (커리어 3회 · 시즌당 1회 · 능력치별 1회) ──
 const GMAP={'결정력':'memory','슈팅':'gauge','피지컬':'tug','페이스':'mash','패스':'rondo','드리블':'rhythm','크로스':'trace','체력':'interval','태클':'timing','빌드업':'rondo','공중볼':'gauge','반응속도':'reaction','위치선정':'timing','수비 조율':'memory'};
 const GN={memory:['골대 메모리','골대 8칸에 불이 켜지는 순서를 기억해 같은 순서로 누릅니다.'],gauge:['파워 게이지','버튼(스페이스바)을 누르고 있다가 게이지가 노란 구간에 왔을 때 손을 뗍니다.'],tug:['몸싸움','5초 안에 연타로 수비수를 밀어내 게이지를 끝까지 채웁니다.'],mash:['스프린트','3초 안에 목표 횟수만큼 연타합니다.'],rondo:['론도','공이 오면 술래·수비에게 막히지 않은 동료의 번호를 눌러 패스합니다. 단계마다 2번 시도합니다.'],rhythm:['리듬 드리블','내려오는 화살표가 노란 선에 닿을 때 같은 방향키를 누릅니다.'],trace:['크로스 궤적','시작점을 누른 채 파란 길을 따라 끝까지 이동합니다. 3초 안에 도착하면 2점, 60% 이상 가면 1점입니다.'],cross:['크로스 타이밍','움직이는 공격수(노란 구간)에 마커가 겹칠 때 멈춥니다.'],interval:['인터벌','2초 연타 + 1초 휴식을 2세트. 단계마다 목표 횟수가 늘어납니다.'],timing:['타이밍','마커가 노란 구간(2점)이나 초록 구간(1점)에 올 때 멈춥니다.'],reaction:['반응 세이브','골대 칸에 공이 나타나면 재빨리 누릅니다. 단계마다 2번, 제한 시간은 점점 짧아집니다.']};
 function spStart(){const spL=s.spLeft??3,dn=s.spDone||[];if(spL<=0||s.spY===s.y)return prep();modal(`<div class="top"><div><span class="tag g">${lab()} 시즌</span> <span class="mute">· 커리어 잔여 ${spL}회</span><h2 style="margin:6px 0 0">특별훈련</h2></div><button class="alt sm" onclick="closeModal()">닫기</button></div>
 <div class="callout"><b>훈련할 능력치를 선택하세요.</b><p>커리어 전체 3회 · 시즌당 1회 · 능력치별 1회만 가능합니다. 능력치마다 훈련 방식이 다릅니다.</p></div>
 <div class="list">${s.k.map(k=>`<button class="li lg" ${dn.includes(k)?'disabled':''} onclick="spIntro('${k}')"><span><b>${k} 강화 훈련</b><small>${dn.includes(k)?'사용 완료':GN[GMAP[k]][0]}</small></span><b style="font-size:17px">${f1(s.st[k])}</b></button>`).join('')}</div>
-<p class="mute" style="margin:10px 0 0">획득 점수 × 0.4 능력치 상승 (최대 +4.0)</p>`)}
+<p class="mute" style="margin:10px 0 0">획득 점수 × 0.25 상승 · 능력치가 높을수록 줄어듭니다 (최대 +2.5)</p>`)}
 const cells=(on,ball)=>Array.from({length:8},(_,i)=>{const x=48+(i%4)*27,y=16+Math.floor(i/4)*30,o=on.indexOf(i);return `<rect x="${x}" y="${y}" width="23" height="25" rx="3" class="${o>=0?'fy':i===ball?'fy':'fn'}"/>${o>=0?`<text x="${x+11.5}" y="${y+17}" class="tk">${o+1}</text>`:''}${i===ball?`<circle cx="${x+11.5}" cy="${y+12.5}" r="7" class="fw"/>`:''}`}).join('');
 const sv=b=>`<svg class="ill" viewBox="0 0 200 90" aria-hidden="true">${b}</svg>`;
 const ILL={memory:()=>sv(`<rect x="42" y="10" width="116" height="70" class="post"/>${cells([1,6])}`),
@@ -1091,7 +1107,7 @@ trace:()=>sv(`<path d="M150 20H55V70H150" class="tw2"/><path d="M150 20H55V46" c
 function spIntro(k){const g=GMAP[k];modal(`<div class="top"><h2 style="margin:0;letter-spacing:.02em">SPECIAL TRAINING</h2><button class="alt sm" onclick="spStart()">뒤로</button></div>
 <h3 style="color:var(--ink);font-size:17px;margin:16px 0 4px">${GN[g][0]} · ${k}</h3><p class="mute">${GN[g][1]} 총 5번 도전합니다.</p>
 ${ILL[g]?ILL[g]():''}
-<p class="mute" style="font-size:12px;margin:0">회차마다 결과에 따라 0~2점, 10점 만점</p><div class="top" style="margin:14px 0;padding-top:12px;border-top:1px solid var(--line)"><span class="mute">능력치 상승</span><b>획득 점수 × 0.4</b></div>
+<p class="mute" style="font-size:12px;margin:0">회차마다 결과에 따라 0~2점, 10점 만점</p><div class="top" style="margin:14px 0;padding-top:12px;border-top:1px solid var(--line)"><span class="mute">능력치 상승</span><b>획득 점수 × 0.25</b></div>
 <button class="w" onclick="closeModal();spPick('${k}')">훈련 시작 →</button>`)}
 function spPick(k){s.spY=s.y;s.spLeft=(s.spLeft??3)-1;(s.spDone=s.spDone||[]).push(k);save();tr={k,g:GMAP[k],r:0,pts:[]};spRound()}
 const spSum=()=>tr.pts.reduce((a,b)=>a+b,0);
@@ -1186,15 +1202,15 @@ kh=e=>{const v=+e.key;if(v>=1&&v<=8)rcPick(v-1)}}
 function rcPick(i){if(tr.lock||tr.tgt<0)return;rcRes(i===tr.tgt)}
 function rcRes(ok){tr.lock=true;kh=null;if(ok)tr.ok++;tr.att++;const fb=document.getElementById('fb');fb.textContent=ok?'선방!':'실점';fb.style.color=`var(--${ok?'g':'red'})`;
 later(()=>{if(tr.att>=2){tr.lock=false;spNext(tr.ok)}else rcAtt()},600)}
-function spEnd(){if(!tr)return;stop();if(tr.reg)return regTrainEnd();const t=spSum(),cur=s.st[tr.k],m=1,gain=r1(t*.4);bump(tr.k,gain);log(`특별훈련(${GN[tr.g][0]}) ${t}/10점 · ${tr.k} +${f1(gain)}`,'특훈','v');
+function spEnd(){if(!tr)return;stop();if(tr.reg)return regTrainEnd();const t=spSum(),cur=s.st[tr.k],m=r1(cl(1.25-cur/32,.45,1)),gain=r1(t*.25*m);bump(tr.k,gain);log(`특별훈련(${GN[tr.g][0]}) ${t}/10점 · ${tr.k} +${f1(gain)}`,'특훈','v');
 modal(`<div><div class="top" style="align-items:center"><h2 style="margin:0">훈련 결과</h2><span class="mute">${GN[tr.g][0]}</span></div>
 <div class="rchips">${tr.pts.map((x,i)=>`<span>${i+1}회 ${x}점</span>`).join('')}</div>
-<div class="resg"><span>${tr.k}</span><div><b>+${f1(gain)}</b><small>${t}점 × 0.4</small></div></div>
+<div class="resg"><span>${tr.k}</span><div><b>+${f1(gain)}</b><small>${t}점 × 0.25${m<1?` × ${m}`:''}</small></div></div>
 <div class="top" style="margin:4px 0 14px"><span class="mute">현재 ${tr.k}</span><b>${f1(s.st[tr.k])}</b></div><button class="w" onclick="closeModal();prep()">시즌 준비로 →</button></div>`);tr=null}
 // ── 은퇴 ──
 function retireAsk(){const back=s.ph;render(`<div class="card res"><div class="big" style="color:var(--red)">현역 은퇴</div><p>${s.age}세, ${cn()}에서 선수 생활을 마칩니다. 은퇴하면 되돌릴 수 없습니다.</p><div class="btns two"><button class="rdf" onclick="retire()">은퇴한다</button><button class="alt" onclick="RES['${back}']()">계속 뛴다</button></div></div>`+sheet())}
 // 레거시 배점: 선수 가치(전성기 OVR×), 누적 기록 배율, 개인 수상 1개당, 팀 우승 1개당, 국가대표 배율
-const LGW=[24,1.45,55,35,1.45];
+const LGW=[26,1.6,60,38,1.6];
 // 칭호: 레거시 점수 구간 (평균 커리어는 '리그의 스타' 전후, '전설'은 영구결번 기준인 7000점부터)
 const LTIT=v=>v>8300?'명예의 전당':v>=7000?'전설':v>=5800?'월드클래스':v>=4600?'리그의 스타':v>=3400?'믿음직한 프로':'기억 속의 선수',titleOf=e=>LTIT(legacyOf(e).total);
 const legacyOf=x=>{const aw=x.aw||[],team=aw.filter(isTeam).length,ind=aw.filter(a=>!isTeam(a)).length,pk0=x.peak?x.peak.o:(x.ovr||60);
@@ -1254,10 +1270,10 @@ function regress(){if(!ME||(ME.uni||0)<5||!s.orig)return;ME.uni-=5;svMe();const 
 function regSave(){try{localStorage.setItem(REGK,JSON.stringify(d))}catch(e){}}
 function regIntro(){const nm=esc(d.name);render(`<div class="cine"><div class="cl">시간이 거꾸로 흐릅니다.</div><div class="cl" style="animation-delay:.9s">${nm}, 다시 15세.</div><div class="cl mute" style="animation-delay:1.8s;font-size:14px;font-weight:400">전생의 기억으로 한 번의 특별훈련을 하고 출발할 수 있습니다.</div>
 <div class="cl btns" style="animation-delay:2.4s;width:100%;max-width:340px;margin-top:20px"><button class="vi" onclick="regTrain()">회귀 특별훈련 →</button><button class="alt" onclick="d.trained=1;regSave();regCands()">특별훈련 없이 후보 보기</button></div></div>`)}
-function regTrain(){const ks=P[d.pos].k;modal(`<div class="top"><div><span class="tag v">회귀</span><h2 style="margin:6px 0 0">회귀 특별훈련</h2></div><button class="alt sm" onclick="closeModal()">닫기</button></div><div class="callout"><b>훈련할 능력치를 고르세요.</b><p>얻은 점수 × 0.4만큼, 고를 후보의 능력치에 더해집니다. 1회만 할 수 있습니다.</p></div>
+function regTrain(){const ks=P[d.pos].k;modal(`<div class="top"><div><span class="tag v">회귀</span><h2 style="margin:6px 0 0">회귀 특별훈련</h2></div><button class="alt sm" onclick="closeModal()">닫기</button></div><div class="callout"><b>훈련할 능력치를 고르세요.</b><p>얻은 점수 × 0.25만큼, 고를 후보의 능력치에 더해집니다. 1회만 할 수 있습니다.</p></div>
 <div class="list">${ks.map(k=>`<button class="li lg" onclick="closeModal();tr={k:'${k}',g:GMAP['${k}'],r:0,pts:[],reg:1};spRound()"><span><b>${k} 강화 훈련</b><small>${GN[GMAP[k]][0]}</small></span></button>`).join('')}</div>`)}
-function regTrainEnd(){const t2=spSum(),gain=r1(t2*.4);d.bonus={k:tr.k,v:gain};d.trained=1;regSave();const g0=GN[tr.g][0],pts=tr.pts;tr=null;
-modal(`<div class="top" style="align-items:center"><h2 style="margin:0">회귀 훈련 결과</h2><span class="mute">${g0}</span></div><div class="rchips">${pts.map((x,i)=>`<span>${i+1}회 ${x}점</span>`).join('')}</div><div class="resg"><span>${d.bonus.k}</span><div><b>+${f1(gain)}</b><small>${t2}점 × 0.4</small></div></div><button class="w" onclick="closeModal();regCands()">전생의 후보 보기 →</button>`)}
+function regTrainEnd(){const t2=spSum(),gain=r1(t2*.25);d.bonus={k:tr.k,v:gain};d.trained=1;regSave();const g0=GN[tr.g][0],pts=tr.pts;tr=null;
+modal(`<div class="top" style="align-items:center"><h2 style="margin:0">회귀 훈련 결과</h2><span class="mute">${g0}</span></div><div class="rchips">${pts.map((x,i)=>`<span>${i+1}회 ${x}점</span>`).join('')}</div><div class="resg"><span>${d.bonus.k}</span><div><b>+${f1(gain)}</b><small>${t2}점 × 0.25</small></div></div><button class="w" onclick="closeModal();regCands()">전생의 후보 보기 →</button>`)}
 function regCands(){d.open=1;d.fresh=1;cands();d.fresh=0}
 function cmpScreen(){let pd;try{pd=JSON.parse(localStorage.getItem(PENDK))}catch(e){}if(!pd)return pcard();const past=hall().find(h=>h.id===pd.pastId),cur=pd.cur;
 const col=(e,lb,k)=>{if(!e)return `<div class="cmpc"><small>${lb}</small><p class="empty">기록을 찾을 수 없습니다</p></div>`;const th=themeOf(e);return `<div class="cmpc th-${th.front}"><small>${lb}</small><b class="cmpn">${esc(e.name)}</b><span class="mute">${esc(e.lg||'-')} · ${e.age}세 은퇴</span><div class="cmpl"><small>LEGACY</small><b>${th.lt.toLocaleString()}</b></div><div class="cmpr"><span>칭호</span><b>${titleOf(e)}</b></div><div class="cmpr"><span>카드</span><b>${TNAME[th.front]} · 전성기 ${TNAME[th.back]}</b></div><div class="cmpr"><span>전성기 OVR</span><b>${f1(e.peak?e.peak.o:e.ovr)}</b></div><div class="cmpr"><span>경기 · 골</span><b>${e.apps} · ${e.goals}</b></div><button class="${k==='cur'?'vi':'alt'} w mt" onclick="keepAsk('${k}')">이 기록 남기기</button></div>`};
